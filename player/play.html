@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}UraniumAnchor's Video Player - {{ video.title }}{% endblock %}
+
+{% block css %}
+<style type="text/css">
+<!--
+body {background-color: #{{ video.backgroundhex }}; padding: 0; margin: 0; height: 100%; text-align: center; font-family: arial, helvetica, sans-serif;}
+div#container {height: 100%}
+p {color: #{{ video.foregroundhex}}; line-height: 7px; font-size: 12px}
+a {color: #AA3333; text-decoration: none;}
+img {border: 0px}
+html { height: 100%; {% if fullscreen %} overflow: hidden; {% endif %} }
+-->
+</style>
+{% endblock %}
+
+{% block content %}
+Video URL: {{ vidurl }}
+Preview: {{ preview }}
+Video {{ video.details }}
+{% endblock %}
