@@ -17,7 +17,7 @@ html { height: 100%; {% if fullscreen %} overflow: hidden; {% endif %} }
 <script type="text/javascript">
 
 var flashvars = {
-skin: "stylish_mod.swf",
+skin: "/media/stylish_mod.swf",
 fullscreen: "true",
 {% if fullscreen %}
 {% else %}
@@ -37,20 +37,20 @@ bgcolor: "#000000"
 var attributes = {};
 
 {% if fullscreen %}
-swfobject.embedSWF("player.swf", "container", "100%", "100%", "9.0.98", false, flashvars, params, attributes);
+swfobject.embedSWF("/media/player.swf", "container", "100%", "100%", "9.0.98", false, flashvars, params, attributes);
 {% else %}
-swfobject.embedSWF("player.swf", "container", "{{ video.width }}", "{{ video.height }}", "9.0.98", false, flashvars, params, attributes);
+swfobject.embedSWF("/media/player.swf", "container", "{{ video.width }}", "{{ video.height }}", "9.0.98", false, flashvars, params, attributes);
 {% endif %}
 </script>
 {% endblock %}
 
 {% block content %}
-<p><b>{{ video.title }} by {{ video.author}}</b></p>
+<p><b>{{ video.title }} by {{ video.author }}</b></p>
 <p id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</p>
 
 <p><br /><a href="{{ vidurl }}">Click here to download this video.</a></p>
 <p>Want to watch in your full browser window?  <a href="?fullscreen=1">Click here!</a></p>
-<p>Page viewed: {{ viewcount }} times.</p>
+<p>Page viewed: {{ video.viewcount }} times.</p>
 <p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, Python by UraniumAnchor.</p>
 {% endblock %}
 
