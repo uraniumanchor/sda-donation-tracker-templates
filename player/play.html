@@ -2,7 +2,7 @@
 
 {% block title %}UraniumAnchor's Video Player - {{ video.title }}{% endblock %}
 
-{% block css %}
+{% block head %}
 <style type="text/css">
 <!--
 body {background-color: #{{ video.backgroundhex }}; padding: 0; margin: 0; height: 100%; text-align: center; font-family: arial, helvetica, sans-serif;}
@@ -13,10 +13,47 @@ img {border: 0px}
 html { height: 100%; {% if fullscreen %} overflow: hidden; {% endif %} }
 -->
 </style>
+<script type="text/javascript" src="/swfobject.js"></script>
+<script type="text/javascript">
+
+var flashvars = {
+skin: "stylish_mod.swf",
+fullscreen: "true",
+{% if fullscreen %}
+{% else %}
+width: "{{ video.width }}",
+height: "{{ video.height }}",
+{% endif %}
+controlbar: "over",
+image: "{{ preview }}",
+file: "{{ vidurl }}"
+};
+
+var params = {
+allowfullscreen: "true",
+bgcolor: "#000000"
+};
+
+var attributes = {};
+
+{% if fullscreen %}
+swfobject.embedSWF("player.swf", "container", "100%", "100%", "9.0.98", false, flashvars, params, attributes);
+{% else %}
+swfobject.embedSWF("player.swf", "container", "{{ video.width }}", "{{ video.height }}", "9.0.98", false, flashvars, params, attributes);
+{% endif %}
+</script>
 {% endblock %}
 
 {% block content %}
-Video URL: {{ vidurl }}
-Preview: {{ preview }}
-Video {{ video.details }}
+<p><b>{{ video.title }} by {{ video.author}}</b></p>
+<p id="container"><a href="http://www.macromedia.com/go/getflashplayer">Get the Flash Player</a> to see this player.</p>
+
+<p><br /><a href="{{ vidurl }}">Click here to download this video.</a></p>
+<p>Want to watch in your full browser window?  <a href="?fullscreen=1">Click here!</a></p>
+<p>Page viewed: {{ viewcount }} times.</p>
+<p>Uses <a href="http://www.jeroenwijering.com/?item=JW_FLV_Media_Player">JW FLV Media Player 4.2.90</a>, player skin <a href="http://www.longtailvideo.com/AddOns/productpage.html?addon=50&amp;q=&amp;category=skins">Stylish</a> modified by jawbroken, Python by UraniumAnchor.</p>
+{% endblock %}
+
+{% block cssfooter %}
+<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></p>
 {% endblock %}
