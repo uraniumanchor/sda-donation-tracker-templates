@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Game Detail{% endblock %}
+
+{% block content %}
+	<table border=4 cellpadding=4>
+		<tr><td><b>Name:</b></td><td align='right'>{{ game.name }}</td></tr>
+		<tr><td><b>Goal Time:</b></td><td align='right'>{{ game.lasttime }}</td></tr>
+		<tr><td><b>Marker Count:</b></td><td align='right'>{{ game.markercount }}</td></tr>
+		<tr><td><b>Attempt Count:</b></td><td align='right'>{{ game.attemptcount }}</td></tr>
+	</table>
+	{% if markers %}
+	<table border=4 cellpadding=4>
+		<tr align='right'>
+			<td><b>Name</b></td><td><b>Goal Time</b></td><td><b>#</b></td>
+			<td><b>Min</b></td>
+			<td><b>Max</b></td>
+			<td><b>Avg</b></td>
+			<td><b>Min Seg</b></td>
+			<td><b>Max Seg</b></td>
+			<td><b>Avg Seg</b></td>
+		</tr>
+	{% for marker in markers %}
+		<tr>
+			<td><a href='marker/{{marker.id}}/'>{{ marker.name }}</a></td><td align='right'>{{ marker.pt }}</td><td align='right'>{{ marker.c }} ({{ marker.pct }}%)</td>
+			<td align='right'>{{ marker.mt }}</td>
+			<td align='right'>{{ marker.xt }}</td>
+			<td align='right'>{{ marker.avt }}</td>
+			<td align='right'>{{ marker.ms }}</td>
+			<td align='right'>{{ marker.xs }}</td>
+			<td align='right'>{{ marker.avs }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% if attempts > 0 %}
+		<p><a href='attempts/'>View Attempts</a></p>
+	{% endif %}
+{% else %}
+	<p>No markers defined.</p>
+{% endif %}
+
+{% endblock %}

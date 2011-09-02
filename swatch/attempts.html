@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Attempts List{% endblock %}
+
+{% block content %}
+	{% if attempts %}
+		<table border=4 cellpadding=4>
+			<tr><td align='right'><b>#</b></td><td align='right'><b>Marker</b></td></tr>
+		{% for attempt in attempts %}
+			<tr><td align='right'>{{ forloop.counter }}</td><td align='right'>{{ attempt.pm }}</td></tr>
+		{% endfor %}
+	{% else %}
+		<p>No Attempts yet</p>
+	{% endif %}
+{% endblock %}

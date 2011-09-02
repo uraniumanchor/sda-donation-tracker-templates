@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Game List{% endblock %}
+
+{% block content %}
+	{% if games %}
+		<table border=4 cellpadding=4>
+		{% for game in games %}
+			<tr><td><a href='game/{{ game.id }}/'>{{ game.name }}</a></td></tr>
+		{% endfor %}
+		</table>
+	{% else %}
+		No games yet.
+	{% endif %}
+{% endblock %}
