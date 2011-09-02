@@ -7,11 +7,24 @@
 {% endblock %}
 
 {% block content %}
-	<div class=\"title\"><b>Video LP Index</b></div>
+	<div class="title"><b>Video LP Index</b></div>
 	<table>
-{% for video in videos %}
+	{% if sort == "title" and desc != 1 %}
+		<tr class="header"><td><a href="?sort=title&order=desc"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
+	{% else %}
+	{% if sort == "author" and desc != 1 %}
+		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author&order=desc"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
+	{% else %}
+	{% if sort == "game" and desc != 1 %}
+		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game&order=desc"><b>Game</b></a></td><td><b>Views</b></td></tr>
+	{% else %}
+		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
+	{% endif %}
+	{% endif %}
+	{% endif %}
+	{% for video in videos %}
 		<tr><td><a href="play/{{ video.id }}/">{{ video.title }}</a></td><td>{{ video.author }}</td><td>{{ video.game }}</td><td>{{ video.viewcount }}</td></tr>
-{% endfor %}
+	{% endfor %}
 		<tr class="header"><td><b>Total Number of Videos</b></td><td></td><td></td><td><b>Total</b></td></tr>
 		<tr><td>{{ videocount }}</td><td></td><td></td><td>{{ videoviewcount }}</td></tr>
 	</table>
