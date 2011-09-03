@@ -6,7 +6,13 @@
 	<table>
 		<tr class="header"><td>Game</td><td>Challenge</td><td>Goal</td><td>Amount</td></tr>
 	{% for challenge in challenges %}
-		<tr><td>{{ challenge.speedRun__name }}</td><td>{{ challenge.name }}</td><td>{{ challenge.goal }}</td><td>{{ challenge.challengebid__amount__sum}}</td></tr>
+		<tr>
+			<td>{{ challenge.speedRun__name|title }}</td>
+			<td>{{ challenge.name|title }}</td>
+			<td>{{ challenge.goal }}</td>
+			<td>${{ challenge.challengebid__amount__sum|default_if_none:0.00|floatformat:2 }}</td>
+		</tr>
 	{% endfor %}
 	</table>
+	<p><a href="{% url tracker.views.index %}">Back to Index</a></p>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends "tracker/index.html" %}
+
+{% block title %}Donor Index{% endblock %}
+
+{% block content %}
+	<table>
+		<tr class="header"><td>Name</td><td>Alias</td><td>Total Donations</td><td>Max/Avg Donation</td></tr>
+	{% for donor in donors %}
+		<tr>
+			<td><a href="{% url tracker.views.donor id=donor.donorId %}">{{ donor.lastName }}, {{ donor.firstName }}</a></td>
+			<td>{{ donor.alias }}</td>
+			<td>${{ donor.donation__amount__sum|floatformat:2 }} ({{ donor.donation__amount__count }})</td>
+			<td>${{ donor.donation__amount__max|floatformat:2 }}/${{ donor.donation__amount__avg|floatformat:2 }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<p><a href="{% url tracker.views.index %}">Back to Index</a></p>
+{% endblock %}

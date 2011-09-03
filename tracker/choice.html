@@ -1,0 +1,18 @@
+{% extends "tracker/index.html" %}
+
+{% block title %}Choice Detail{% endblock %}
+
+{% block content %}
+	<div class="title"><b>Game:</b> {{ choice.speedRun|title }} <b>Choice:</b> {{ choice.name|title }}</div>
+	<table>
+		<tr class="header"><td>Option</td><td>Amount</td></tr>
+	{% for option in options %}
+		<tr>
+			<td><a href="{% url tracker.views.choiceoption id=option.optionId %}">{{ option.name }}</a></td>
+			<td>${{ option.choicebid__amount__sum|default_if_none:0.00|floatformat:2 }} ({{option.choicebid__amount__count}})</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+	<p><a href="{% url tracker.views.choiceindex %}">Back to Choice Index</a></p>
+	<p><a href="{% url tracker.views.index %}">Back to Index</a></p>
+{% endblock %}

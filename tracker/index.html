@@ -5,9 +5,14 @@
 {% block head %}<link rel="stylesheet" type="text/css" href="http://static.uranium-anchor.com/videoindex.css" />{% endblock %}
 
 {% block content %}
-<h1>Donation Total: {{ total }}</h1>
-<p><a href="challenge/">View Challenges</a></p>
-<p><a href="choice/">View Choices</a></p>
+<center>
+	<h1>Donation Total: {{ total }} ({{ count }})</h1>
+	<h2>Min/Max/Avg Donation: {{ mx }}/{{ av }}</h2>
+</center>
+<p><a href="{% url tracker.views.challengeindex %}">View Challenges</a></p>
+<p><a href="{% url tracker.views.choiceindex %}">View Choices</a></p>
+<p><a href="{% url tracker.views.donorindex %}">View Donors</a></p>
+<p><a href="{% url tracker.views.donationindex %}">View Donations</a></p>
 {% endblock %}
 
 {% block cssfooter %}
