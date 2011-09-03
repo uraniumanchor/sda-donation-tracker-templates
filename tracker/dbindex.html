@@ -1,0 +1,17 @@
+{% extends "tracker/index.html" %}
+
+{% block title %}Database Index{% endblock %}
+
+{% block content %}
+	<div class="title">
+		<b>Database Index</b>
+	</div>
+	<table>
+	{% for key,database in databases.items %}
+		<tr>
+			<td><a href="{% url tracker.views.index db=key|add:'/' %}">{{ database.COMMENT }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+{% endblock %}
