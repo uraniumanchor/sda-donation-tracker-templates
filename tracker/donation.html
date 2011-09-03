@@ -4,7 +4,7 @@
 
 {% block content %}
 	<div class="title"><b>Name:</b> <a href="{% url tracker.views.donor id=donation.donorId.donorId %}">{{ donation.donorId.lastName }}, {{ donation.donorId.firstName }}</a> <b>Time Received:</b> {{ donation.timeReceived }} <b>Amount:</b> ${{ donation.amount|floatformat:2 }}</div>
-	{% if donation.comment|length > 0 %}
+	{% if donation.comment %}
 	<table>
 		<tr class="header"><td><center><b>Comment</b></center></td></tr>
 		<tr><td>
