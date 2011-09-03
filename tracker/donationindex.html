@@ -1,0 +1,20 @@
+{% extends "tracker/index.html" %}
+
+{% block title %}Donation Index{% endblock %}
+
+{% block content %}
+	<table>
+		<tr class="header"><td>Name</td>{% if emails %}<td>Email</td>{% endif %}<td>Time Received</td><td>Amount</td></tr>
+	{% for donation in donations %}
+		<tr>
+			<td><a href="{% url tracker.views.donor id=donation.donorId__donorId %}">
+				{% if usernames %}{{ donation.donorId__lastName }}{% else %}{{ donation.donorId__lastName|slice:":1" }}...{% endif %}, {{ donation.donorId__firstName }}
+			</a></td>
+			{% if emails %}<td>{{ donation.donorId__email }}</td>{% endif %}
+			<td>{{ donation.timeReceived }}</td>
+			<td><a href="{% url tracker.views.donation id=donation.donationId %}">${{ donation.amount|floatformat:2 }}</a></td>
+		</tr>
+	{% endfor %}
+	</table>
+	<p><a href="{% url tracker.views.index %}">Back to Index</a></p>
+{% endblock %}
