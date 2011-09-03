@@ -7,7 +7,7 @@
 		<tr class="header"><td>Name</td><td>Alias</td><td>Total Donations</td><td>Max/Avg Donation</td></tr>
 	{% for donor in donors %}
 		<tr>
-			<td><a href="{% url tracker.views.donor id=donor.donorId %}">{{ donor.lastName }}, {{ donor.firstName }}</a></td>
+			<td><a href="{% url tracker.views.donor id=donor.donorId %}">{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}</a></td>
 			<td>{{ donor.alias }}</td>
 			<td>${{ donor.donation__amount__sum|floatformat:2 }} ({{ donor.donation__amount__count }})</td>
 			<td>${{ donor.donation__amount__max|floatformat:2 }}/${{ donor.donation__amount__avg|floatformat:2 }}</td>

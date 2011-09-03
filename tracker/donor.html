@@ -3,7 +3,12 @@
 {% block title %}Donor Detail{% endblock %}
 
 {% block content %}
-	<div class="title"><b>Name:</b> {{ donor.lastName }}, {{ donor.firstName }} {% if donor.alias %}<b>Alias</b> {{ donor.alias }} {% endif %}<b>Total Donations:</b> {{ total }} ({{ agg.amount__count }}) <b>Max/Avg Donation:</b> {{ mx }}/{{ av }}</div>
+	<div class="title">
+		<b>Name:</b> {% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}
+		{% if donor.alias %}<b>Alias</b> {{ donor.alias }} {% endif %}
+		<b>Total Donations:</b> {{ total }} ({{ agg.amount__count }}) 
+		<b>Max/Avg Donation:</b> {{ mx }}/{{ av }}
+	</div>
 	<table>
 		<tr class="header"><td>Time</td><td>Amount</td><td>Comment</td></tr>
 	{% for donation in donations %}

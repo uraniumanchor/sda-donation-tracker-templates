@@ -12,7 +12,9 @@
 		<tr class="header"><td>Name</td><td>Time</td><td>Amount</td></tr>
 	{% for choicebid in choicebids %}
 		<tr>
-			<td><a href="{% url tracker.views.donor id=choicebid.donationId__donorId %}">{{ choicebid.donationId__donorId__lastName}}, {{ choicebid.donationId__donorId__firstName }}</a></td>
+			<td><a href="{% url tracker.views.donor id=choicebid.donationId__donorId %}">
+				{% if usernames %}{{ choicebid.donationId__donorId__lastName}}{% else %}{{ choicebid.donationId__donorId__lastName|slice:":1"}}...{% endif %}, {{ choicebid.donationId__donorId__firstName }}
+			</a></td>
 			<td>{{ choicebid.donationId__timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation id=choicebid.donationId %}">${{ choicebid.amount|floatformat:2 }}</a></td>
 		</tr>
