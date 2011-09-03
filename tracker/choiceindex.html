@@ -3,14 +3,10 @@
 {% block title %}Choices Index{% endblock %}
 
 {% block content %}
-	{% if choices %}
-		<table>
-			<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>
-		{% for choice in choices %}
-			<tr><td>{{ choice.speedRun__name }}</td><td>{{ choice.name }}</td><td>{{ choice.choiceoption__name }}</td><td>{{ choice.choiceoption__choicebid__amount__sum}}</tr>
-		{% endfor %}
-		</table>
-	{% else %}
-		<p>No choices</p>
-	{% endif %}
+	<table>
+		<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>
+	{% for choice in choices %}
+		<tr><td>{{ choice.speedRun__name }}</td><td>{{ choice.name }}</td><td>{{ choice.choiceoption__name }}</td><td>{{ choice.choiceoption__choicebid__amount__sum}}</td></tr>
+	{% endfor %}
+	</table>
 {% endblock %}

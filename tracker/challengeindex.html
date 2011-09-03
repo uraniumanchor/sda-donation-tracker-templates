@@ -3,14 +3,10 @@
 {% block title %}Challenges Index{% endblock %}
 
 {% block content %}
-	{% if challenges %}
-		<table>
-			<tr class="header"><td>Game</td><td>Challenge</td><td>Goal</td><td>Amount</td></tr>
-		{% for challenge in challenges %}
-			<tr><td>{{ challenge.speedRun__name }}</td><td>{{ challenge.name }}</td><td>{{ challenge.goal }}</td><td>{{ challenge.challengebid__amount__sum}}</tr>
-		{% endfor %}
-		</table>
-	{% else %}
-		<p>No challenges</p>
-	{% endif %}
+	<table>
+		<tr class="header"><td>Game</td><td>Challenge</td><td>Goal</td><td>Amount</td></tr>
+	{% for challenge in challenges %}
+		<tr><td>{{ challenge.speedRun__name }}</td><td>{{ challenge.name }}</td><td>{{ challenge.goal }}</td><td>{{ challenge.challengebid__amount__sum}}</td></tr>
+	{% endfor %}
+	</table>
 {% endblock %}

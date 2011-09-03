@@ -23,7 +23,7 @@
 	{% endif %}
 	{% endif %}
 	{% for video in videos %}
-		<tr><td><a href="play/{{ video.id }}/">{{ video.title }}</a></td><td>{{ video.author }}</td><td>{{ video.game }}</td><td>{{ video.viewcount }}</td></tr>
+		<tr><td><a href="{% url player.views.player id=video.id %}">{{ video.title }}</a></td><td>{{ video.author }}</td><td>{{ video.game }}</td><td>{{ video.viewcount }}</td></tr>
 	{% endfor %}
 		<tr class="header"><td><b>Total Number of Videos</b></td><td></td><td></td><td><b>Total</b></td></tr>
 		<tr><td>{{ videocount }}</td><td></td><td></td><td>{{ videoviewcount }}</td></tr>
