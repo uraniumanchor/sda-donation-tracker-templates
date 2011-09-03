@@ -1,18 +1,24 @@
 {% extends "tracker/index.html" %}
 
-{% block title %}Choice Index{% endblock %}
+{% block title %}Choice Index -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
+	<div class="title">
+		<b>Event:</b> {{ dbtitle|title }} <b>Choice Index</b>
+	</div>
 	<table>
 		<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>
 	{% for choice in choices %}
 		<tr>
-			<td><a href="{% url tracker.views.game id=choice.speedRun__speedRunId %}">{{ choice.speedRun__name|title }}</a></td>
-			<td><a href="{% url tracker.views.choice id=choice.choiceId %}">{{ choice.name|title }}</a></td>
-			<td><a href="{% url tracker.views.choiceoption id=choice.choiceoption__optionId %}">{{ choice.choiceoption__name }}</a></td>
+			<td><a href="{% url tracker.views.game db=db id=choice.speedRun__speedRunId %}">{{ choice.speedRun__name|title }}</a></td>
+			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
+			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption__optionId %}">{{ choice.choiceoption__name }}</a></td>
 			<td>${{ choice.choiceoption__choicebid__amount__sum|default_if_none:"0.00"|floatformat:2 }}</td>
 		</tr>
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.index %}">Back to Index</a></p>
+	{% if db %}
+	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
+	{% endif %}
+	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
 {% endblock %}
