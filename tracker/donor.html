@@ -5,6 +5,7 @@
 {% block content %}
 	<div class="title">
 		<b>Name:</b> {% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}
+		{% if emails %}<b>Email:</b> {{ donor.email }}{% endif %}
 		{% if donor.alias %}<b>Alias</b> {{ donor.alias }} {% endif %}
 		<b>Total Donations:</b> {{ total }} ({{ agg.amount__count }}) 
 		<b>Max/Avg Donation:</b> {{ mx }}/{{ av }}

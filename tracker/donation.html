@@ -3,8 +3,9 @@
 {% block title %}Donation Detail{% endblock %}
 
 {% block content %}
-	<div class="title"><b>Name:</b> <a href="{% url tracker.views.donor id=donation.donorId.donorId %}">
-		{% if usernames %}{{ donation.donorId.lastName }}{% else %}{{ donation.donorId.lastName|slice:":1" }}...{% endif %}, {{ donation.donorId.firstName }}
+	<div class="title">
+		<b>Name:</b> <a href="{% url tracker.views.donor id=donor.donorId %}">
+		{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }} {% if emails %}({{ donor.email }}){% endif %}
 		</a> 
 		<b>Time Received:</b> {{ donation.timeReceived }} 
 		<b>Amount:</b> ${{ donation.amount|floatformat:2 }}
