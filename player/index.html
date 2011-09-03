@@ -10,13 +10,13 @@
 	<div class="title"><b>Video LP Index</b></div>
 	<table>
 	{% if sort == "title" and desc != 1 %}
-		<tr class="header"><td><a href="?sort=title&order=desc"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
+		<tr class="header"><td><a href="?sort=title&amp;order=desc"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
 	{% else %}
 	{% if sort == "author" and desc != 1 %}
-		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author&order=desc"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
+		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author&amp;order=desc"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
 	{% else %}
 	{% if sort == "game" and desc != 1 %}
-		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game&order=desc"><b>Game</b></a></td><td><b>Views</b></td></tr>
+		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game&amp;order=desc"><b>Game</b></a></td><td><b>Views</b></td></tr>
 	{% else %}
 		<tr class="header"><td><a href="?sort=title"><b>Title</b></a></td><td><a href="?sort=author"><b>Author</b></a></td><td><a href="?sort=game"><b>Game</b></a></td><td><b>Views</b></td></tr>
 	{% endif %}
