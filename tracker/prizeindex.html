@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load sort_tags %}
 
 {% block title %}Prize Index -- {{ dbtitle|title }}{% endblock %}
 
@@ -7,7 +8,12 @@
 		<b>Event:</b> {{ dbtitle|title }} <b>Prize Index</b>
 	</div>
 	<table>
-		<tr class="header"><td>Name</td><td>Description</td><td>Image</td><td>Winner</td></tr>
+		<tr class="header">
+			<td>Name</td>
+			<td>Description</td>
+			<td>Image</td>
+			<td>Winner</td>
+		</tr>
 	{% for prize in prizes %}
 		<tr>
 			<td>{{ prize.name|title }}</td>

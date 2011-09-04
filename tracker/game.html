@@ -11,7 +11,11 @@
 		Challenges
 	</div>
 	<table>
-		<tr class="header"><td>Name</td><td>Goal</td><td>Amount</td></tr>
+		<tr class="header">
+			<td>Name</td>
+			<td>Goal</td>
+			<td>Amount</td>
+		</tr>
 	{% for challenge in challenges %}
 		<tr>
 			<td><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}">{{ challenge.name }}</a></td>
@@ -26,7 +30,11 @@
 		Choices
 	</div>
 	<table>
-		<tr class="header"><td>Name</td><td>Option</td><td>Amount</td></tr>
+		<tr class="header">
+			<td>Name</td>
+			<td>Option</td>
+			<td>Amount</td>
+		</tr>
 	{% for choice in choices %}
 		<tr>
 			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>

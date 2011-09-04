@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load sort_tags %}
 
 {% block title %}Donor Index -- {{ dbtitle|title }}{% endblock %}
 
@@ -7,7 +8,13 @@
 		<b>Event:</b> {{ dbtitle|title }} <b>Donor Index</b>
 	</div>
 	<table>
-		<tr class="header"><td>Name</td>{% if emails %}<td>Email</td>{% endif %}<td>Alias</td><td>Total Donations</td><td>Max/Avg Donation</td></tr>
+		<tr class="header">
+			<td>Name{% sort "name" %}</td>
+			{% if emails %}<td>Email</td>{% endif %}
+			<td>Alias</td>
+			<td>Total Donations{% sort "total" %}</td>
+			<td>Max{% sort "max" %}/Avg{% sort "avg" %} Donation</td>
+		</tr>
 	{% for donor in donors %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=donor.donorId %}">

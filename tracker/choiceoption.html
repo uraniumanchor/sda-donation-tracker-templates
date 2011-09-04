@@ -9,7 +9,12 @@
 		<b>Option:</b> {{ choiceoption.name }}
 	</div>
 	<table>
-		<tr class="header"><td>Name</td>{% if emails %}<td>Email</td>{% endif %}<td>Time</td><td>Amount</td></tr>
+		<tr class="header">
+			<td>Name</td>
+			{% if emails %}<td>Email</td>{% endif %}
+			<td>Time</td>
+			<td>Amount</td>
+		</tr>
 	{% for choicebid in choicebids %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=choicebid.donationId__donorId %}">
