@@ -10,7 +10,7 @@
 		<tr class="header"><td>Name</td>{% if emails %}<td>Email</td>{% endif %}<td>Time Received</td><td>Amount</td><td>Comment</td></tr>
 	{% for donation in donations %}
 		<tr>
-			<td><a href="{% url tracker.views.donor db=db id=donation.donorId__donorId %}">
+			<td><a href="{% url tracker.views.donor db=db id=donation.donorId %}">
 				{% if usernames %}{{ donation.donorId__lastName }}{% else %}{{ donation.donorId__lastName|slice:":1" }}...{% endif %}, {{ donation.donorId__firstName }}
 			</a></td>
 			{% if emails %}<td><a href="mailto:{{ donation.donorId__email }}">{{ donation.donorId__email }}</a></td>{% endif %}

@@ -10,9 +10,9 @@
 		<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>
 	{% for choice in choices %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=choice.speedRun__speedRunId %}">{{ choice.speedRun__name|title }}</a></td>
+			<td><a href="{% url tracker.views.game db=db id=choice.speedRun %}">{{ choice.speedRun__name|title }}</a></td>
 			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
-			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption__optionId %}">{{ choice.choiceoption__name }}</a></td>
+			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a></td>
 			<td>${{ choice.choiceoption__choicebid__amount__sum|default_if_none:"0.00"|floatformat:2 }}</td>
 		</tr>
 	{% endfor %}

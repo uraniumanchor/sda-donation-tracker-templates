@@ -10,7 +10,7 @@
 		<tr class="header"><td>Game</td><td>Challenge</td><td>Goal</td><td>Amount</td></tr>
 	{% for challenge in challenges %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=challenge.speedRun__speedRunId %}">{{ challenge.speedRun__name|title }}</a></td>
+			<td><a href="{% url tracker.views.game db=db id=challenge.speedRun %}">{{ challenge.speedRun__name|title }}</a></td>
 			<td><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}">{{ challenge.name|title }}</a></td>
 			<td>${{ challenge.goal|floatformat:2 }}</td>
 			<td>${{ challenge.challengebid__amount__sum|default_if_none:0.00|floatformat:2 }}</td>

@@ -13,7 +13,7 @@
 			<td>{{ prize.name|title }}</td>
 			<td>{{ prize.description|escape }}</td>
 			<td>{% if prize.image %}<a href="{{ prize.image }}">Link</a>{% endif %}</td>
-			<td>{% if prize.donor__lastName %}{% if usernames %}{{ prize.donor__lastName }}{% else %}{{ prize.donor__lastName|slice:":1" }}...{% endif %}, {{ prize.donor__firstName }}
+			<td><a href="{% url tracker.views.donor db=db id=prize.donor %}">{% if prize.donor__lastName %}{% if usernames %}{{ prize.donor__lastName }}{% else %}{{ prize.donor__lastName|slice:":1" }}...{% endif %}, {{ prize.donor__firstName }}</a>
 			{% if emails %}(<a href="mailto:{{ prize.donor__email }}">{{ prize.donor__email }}</a>){% endif %}{% endif %}</td>
 		</tr>
 	{% endfor %}
