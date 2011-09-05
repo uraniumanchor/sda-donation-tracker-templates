@@ -2,6 +2,7 @@
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 <form method="post" action="{% url donations.tracker.views.login %}">
+<fieldset>
 {% csrf_token %}
 {{ form.username.label_tag }}
 {{ form.username }}
@@ -9,4 +10,5 @@
 {{ form.password }}
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
+</fieldset>
 </form>

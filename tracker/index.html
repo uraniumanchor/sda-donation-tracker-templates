@@ -28,7 +28,6 @@
 {% endblock %}
 
 {% block login %}
-<p>
 <div class="footer">
 {% if user.is_authenticated %}
 Welcome {{ user.username }} | <a href="{% url tracker.views.logout %}">Logout</a>
@@ -36,6 +35,5 @@ Welcome {{ user.username }} | <a href="{% url tracker.views.logout %}">Logout</a
 {% include "tracker/login.html" %}
 {% endif %}
 </div>
-</p>
 {% endblock %}
 
