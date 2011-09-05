@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load sort_tags %}
 
 {% block title %}Choice Option Detail -- {{ dbtitle|title }}{% endblock %}
 
@@ -10,10 +11,10 @@
 	</div>
 	<table>
 		<tr class="header">
-			<td>Name</td>
+			<td>Name{% sort "name" %}</td>
 			{% if emails %}<td>Email</td>{% endif %}
-			<td>Time</td>
-			<td>Amount</td>
+			<td>Time{% sort "time" %}</td>
+			<td>Amount{% sort "amount" %}</td>
 		</tr>
 	{% for choicebid in choicebids %}
 		<tr>

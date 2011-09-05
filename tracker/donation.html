@@ -20,6 +20,48 @@
 		</td></tr>
 	</table>
 	{% endif %}
+	{% if challengebids %}
+	<div class="header">
+		<a href="{% url tracker.views.challengeindex db=db %}">Challenge Bids</a>
+	</div>
+	<table>
+		<tr class="header">
+			<td>Game</td>
+			<td>Name</td>
+			<td>Goal</td>
+			<td>Amount</td>
+		</tr>
+	{% for bid in challengebids %}
+		<tr>
+			<td><a href="{% url tracker.views.game db=db id=bid.challenge__speedRun %}">{{ bid.challenge__speedRun__name|title }}</a></td>
+			<td><a href="{% url tracker.views.challenge db=db id=bid.challenge %}">{{ bid.challenge__name }}</a></td>
+			<td>${{ bid.challenge__goal|floatformat:2 }}</td>
+			<td>${{ bid.amount|floatformat:2 }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% endif %}
+	{% if choicebids %}
+	<div class="header">
+		<a href="{% url tracker.views.choiceindex db=db %}">Choice Bids</a>
+	</div>
+	<table>
+		<tr class="header">
+			<td>Game</td>
+			<td>Choice</td>
+			<td>Option</td>
+			<td>Amount</td>
+		</tr>
+	{% for bid in choicebids %}
+		<tr>
+			<td><a href="{% url tracker.views.game db=db id=bid.optionId__choice__speedRun %}">{{ bid.optionId__choice__speedRun__name|title }}</a></td>
+			<td><a href="{% url tracker.views.choice db=db id=bid.optionId__choice %}">{{ bid.optionId__choice__name|title }}</a></td>
+			<td><a href="{% url tracker.views.choiceoption db=db id=bid.optionId %}">{{ bid.optionId__name }}</a></td>
+			<td>${{ bid.amount|default_if_none:"0.00"|floatformat:2 }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	{% endif %}
 	<p><a href="{% url tracker.views.donationindex db=db %}">Back to Donation Index</a></p>
 	{% if db %}
 	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>

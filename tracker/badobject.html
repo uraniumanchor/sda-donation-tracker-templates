@@ -4,5 +4,8 @@
 
 {% block content %}
 	<p>Selected Object Does Not Exist In Database</p>
+	{% if db %}
+	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
+	{% endif %}
 	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
 {% endblock %}

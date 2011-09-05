@@ -9,6 +9,9 @@
 	<table>
 		<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>
 	{% for choice in choices %}
+		{% ifchanged choice.speedRun__name %}{% if forloop.counter > 1 %}
+		<tr class="header"><td colspan="4"></td></tr>
+		{% endif %}{% endifchanged %}
 		<tr>
 			<td><a href="{% url tracker.views.game db=db id=choice.speedRun %}">{{ choice.speedRun__name|title }}</a></td>
 			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
