@@ -11,7 +11,7 @@
 		<b>Total Donations:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }}) 
 		<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 	</div>
-	<table width="60%">
+	<table>
 		<tr class="header"><td>Time</td><td>Amount</td><td>Comment</td></tr>
 	{% for donation in donations %}
 		<tr>

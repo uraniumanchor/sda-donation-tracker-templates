@@ -38,3 +38,10 @@ Welcome {{ user.username }} | <a href="{% url tracker.views.logout %}">Logout</a
 </div>
 {% endblock %}
 
+{% block rendertime %}
+{% if user.is_authenticated %}
+<p>
+{% rendertime starttime %}
+</p>
+{% endif %}
+{% endblock %}
