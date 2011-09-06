@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load donation_tags %}
 
 {% block title %}Game Detail -- {{ dbtitle|title }}{% endblock %}
 
@@ -19,8 +20,8 @@
 	{% for challenge in challenges %}
 		<tr>
 			<td><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}">{{ challenge.name }}</a></td>
-			<td>${{ challenge.goal|floatformat:2 }}</td>
-			<td>${{ challenge.challengebid__amount__sum|floatformat:2 }}</td>
+			<td>{{ challenge.goal|money }}</td>
+			<td>{{ challenge.challengebid__amount__sum|money }}</td>
 		</tr>
 	{% endfor %}
 	</table>
@@ -43,11 +44,12 @@
 
 			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
 			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a></td>
-			<td>${{ choice.choiceoption__choicebid__amount__sum|default_if_none:"0.00"|floatformat:2 }}</td>
+			<td>{{ choice.choiceoption__choicebid__amount__sum|money }}</td>
 		</tr>
 	{% endfor %}
 	</table>
 	{% endif %}
+	<p><a href="{% url tracker.views.gameindex db=db %}">Back to Game Index</a></p>
 	{% if db %}
 	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
 	{% endif %}

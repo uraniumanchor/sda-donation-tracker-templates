@@ -1,11 +1,13 @@
 {% extends "tracker/index.html" %}
-{% load sort_tags %}
+{% load donation_tags %}
 
 {% block title %}Donation Index -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} <b>Donation Index</b>
+		<b>Event:</b> {{ dbtitle|title }} 
+		<b>Donation Index Total:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
+		<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 	</div>
 	<table>
 		<tr class="header">
@@ -23,7 +25,7 @@
 			</a></td>
 			{% if emails %}<td><a href="mailto:{{ donation.donorId__email }}">{{ donation.donorId__email }}</a></td>{% endif %}
 			<td>{{ donation.timeReceived }}</td>
-			<td><a href="{% url tracker.views.donation db=db id=donation.donationId %}">${{ donation.amount|floatformat:2 }}</a></td>
+			<td><a href="{% url tracker.views.donation db=db id=donation.donationId %}">{{ donation.amount|money }}</a></td>
 			{% if emails %}<td>{{ donation.domain|title }}</td>{% endif %}
 			<td>{% if donation.comment|length %}Yes{% else %}No{% endif %}</td>
 		</tr>

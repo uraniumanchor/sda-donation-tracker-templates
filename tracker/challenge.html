@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load donation_tags %}
 
 {% block title %}Challenge Detail -- {{ dbtitle|title }}{% endblock %}
 
@@ -6,6 +7,7 @@
 	<div class="title">
 		<b>Game:</b> {{ challenge.speedRun|title }} 
 		<b>Challenge:</b> {{ challenge.name|title }}
+		<b>Total:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
 		<tr class="header"><td>Name</td>{% if emails %}<td>Email</td>{% endif %}<td>Time</td><td>Amount</td></tr>
@@ -16,7 +18,7 @@
 			</a></td>
 			{% if emails %}<td><a href="mailto:{{ bid.donation__donorId__email }}">{{ bid.donation__donorId__email }}</a></td>{% endif %}
 			<td>{{ bid.donation__timeReceived }}</td>
-			<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">${{ bid.amount|floatformat:2 }}</a></td>
+			<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a></td>
 		</tr>
 	{% endfor %}
 	</table>

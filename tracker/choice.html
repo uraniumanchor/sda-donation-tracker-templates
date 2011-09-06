@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load donation_tags %}
 
 {% block title %}Choice Detail -- {{ dbtitle|title }}{% endblock %}
 
@@ -6,13 +7,14 @@
 	<div class="title">
 		<b>Game:</b> {{ choice.speedRun|title }} 
 		<b>Choice:</b> {{ choice.name|title }}
+		<b>Total:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
 		<tr class="header"><td>Option</td><td>Amount</td></tr>
 	{% for option in options %}
 		<tr>
 			<td><a href="{% url tracker.views.choiceoption db=db id=option.optionId %}">{{ option.name }}</a></td>
-			<td>${{ option.choicebid__amount__sum|default_if_none:0.00|floatformat:2 }} ({{option.choicebid__amount__count}})</a></td>
+			<td>{{ option.choicebid__amount__sum|money }} ({{option.choicebid__amount__count}})</a></td>
 		</tr>
 	{% endfor %}
 	</table>

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load donation_tags %}
 
 {% block title %}{{ dbtitle|title }} -- Index{% endblock %}
 
@@ -7,8 +8,8 @@
 {% block content %}
 <div class="title">
 	<b>Event:</b> {{ dbtitle|title }}
-	<b>Donation Total:</b> {{ total }} ({{ count }})
-	<b>Max/Avg Donation:</b> {{ mx }}/{{ av }}
+	<b>Donation Total:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
+	<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 </div>
 <p><br /></p>
 <p><a href="{% url tracker.views.gameindex db=db %}">View Games</a></p>

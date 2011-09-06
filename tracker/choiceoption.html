@@ -1,5 +1,5 @@
 {% extends "tracker/index.html" %}
-{% load sort_tags %}
+{% load donation_tags %}
 
 {% block title %}Choice Option Detail -- {{ dbtitle|title }}{% endblock %}
 
@@ -8,7 +8,7 @@
 		<b>Game:</b> <a href="{% url tracker.views.game db=db id=choiceoption.choice.speedRun.speedRunId %}">{{ choiceoption.choice.speedRun|title }}</a>
 		<b>Choice:</b> <a href="{% url tracker.views.choice db=db id=choiceoption.choice.choiceId %}">{{ choiceoption.choice.name|title }}</a> 
 		<b>Option:</b> {{ choiceoption.name }}
-		<b>Total:</b> ${{ total|default_if_none:"0.00"|floatformat:2 }}
+		<b>Total:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
 		<tr class="header">
@@ -24,7 +24,7 @@
 			</a></td>
 			{% if emails %}<td><a href="mailto:{{ choicebid.donationId__donorId__email }}">{{ choicebid.donationId__donorId__email }}</a></td>{% endif %}
 			<td>{{ choicebid.donationId__timeReceived }}</td>
-			<td><a href="{% url tracker.views.donation db=db id=choicebid.donationId %}">${{ choicebid.amount|floatformat:2 }}</a></td>
+			<td><a href="{% url tracker.views.donation db=db id=choicebid.donationId %}">{{ choicebid.amount|money }}</a></td>
 		</tr>
 	{% endfor %}
 	</table>

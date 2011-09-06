@@ -1,4 +1,5 @@
 {% extends "tracker/index.html" %}
+{% load donation_tags %}
 
 {% block title %}Donation Detail -- {{ dbtitle|title }}{% endblock %}
 
@@ -7,13 +8,13 @@
 		<b>Name:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}"></a> 
 		{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }} {% if emails %}(<a href="mailto:{{ donor.email }}">{{ donor.email }}</a>){% endif %}
 		<b>Time Received:</b> {{ donation.timeReceived }} 
-		<b>Amount:</b> ${{ donation.amount|floatformat:2 }}
+		<b>Amount:</b> {{ donation.amount|money }}
 	</div>
 	{% if donation.comment %}
 	<table>
 		<tr class="header"><td align="center"><b>Comment</b></td></tr>
 		<tr><td>
-			{{ donation.comment }}
+			{{ donation.comment|forumfilter }}
 		</td></tr>
 	</table>
 	{% endif %}
@@ -32,8 +33,8 @@
 		<tr>
 			<td><a href="{% url tracker.views.game db=db id=bid.challenge__speedRun %}">{{ bid.challenge__speedRun__name|title }}</a></td>
 			<td><a href="{% url tracker.views.challenge db=db id=bid.challenge %}">{{ bid.challenge__name }}</a></td>
-			<td>${{ bid.challenge__goal|floatformat:2 }}</td>
-			<td>${{ bid.amount|floatformat:2 }}</td>
+			<td>{{ bid.challenge__goal|money }}</td>
+			<td>{{ bid.amount|money }}</td>
 		</tr>
 	{% endfor %}
 	</table>
@@ -54,7 +55,7 @@
 			<td><a href="{% url tracker.views.game db=db id=bid.optionId__choice__speedRun %}">{{ bid.optionId__choice__speedRun__name|title }}</a></td>
 			<td><a href="{% url tracker.views.choice db=db id=bid.optionId__choice %}">{{ bid.optionId__choice__name|title }}</a></td>
 			<td><a href="{% url tracker.views.choiceoption db=db id=bid.optionId %}">{{ bid.optionId__name }}</a></td>
-			<td>${{ bid.amount|default_if_none:"0.00"|floatformat:2 }}</td>
+			<td>{{ bid.amount|default_if_none:"0.00"|floatformat:2 }}</td>
 		</tr>
 	{% endfor %}
 	</table>
