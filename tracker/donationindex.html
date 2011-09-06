@@ -13,6 +13,7 @@
 			{% if emails %}<td>Email</td>{% endif %}
 			<td>Time Received{% sort "time" %}</td>
 			<td>Amount{% sort "amount" %}</td>
+			{% if emails %}<td>Source</td>{% endif %}
 			<td>Comment</td>
 		</tr>
 	{% for donation in donations %}
@@ -23,6 +24,7 @@
 			{% if emails %}<td><a href="mailto:{{ donation.donorId__email }}">{{ donation.donorId__email }}</a></td>{% endif %}
 			<td>{{ donation.timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=donation.donationId %}">${{ donation.amount|floatformat:2 }}</a></td>
+			{% if emails %}<td>{{ donation.domain|title }}</td>{% endif %}
 			<td>{% if donation.comment|length %}Yes{% else %}No{% endif %}</td>
 		</tr>
 	{% endfor %}
