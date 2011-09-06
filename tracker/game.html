@@ -4,7 +4,7 @@
 
 {% block content %}
 	<div class="title">
-		<b>Game:</b> {{ game.name }} <b>Description:</b> {{ game.description }}
+		<b>Game:</b> {{ game.name|title }} <b>Description:</b> {{ game.description }}
 	</div>
 	{% if challenges %}
 	<div class="header">
@@ -36,7 +36,11 @@
 			<td>Amount</td>
 		</tr>
 	{% for choice in choices %}
+		{% ifchanged choice.name %}{% if forloop.counter > 1 %}
+		<tr class="header"><td colspan="3"></td></tr>
+		{% endif %}{% endifchanged %}
 		<tr>
+
 			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
 			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a></td>
 			<td>${{ choice.choiceoption__choicebid__amount__sum|default_if_none:"0.00"|floatformat:2 }}</td>
