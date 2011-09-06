@@ -5,8 +5,8 @@
 
 {% block content %}
 	<div class="title">
-		<b>Name:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}"></a> 
-		{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }} {% if emails %}(<a href="mailto:{{ donor.email }}">{{ donor.email }}</a>){% endif %}
+		<b>Name:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}">
+		{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}</a> {% if emails %}(<a href="mailto:{{ donor.email }}">{{ donor.email }}</a>){% endif %}
 		<b>Time Received:</b> {{ donation.timeReceived }} 
 		<b>Amount:</b> {{ donation.amount|money }}
 	</div>

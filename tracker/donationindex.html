@@ -1,11 +1,9 @@
 {% extends "tracker/index.html" %}
 {% load donation_tags %}
-{% load cache %}
 
 {% block title %}Donation Index -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
-	{% cache 300 agg.amount__count dbtitle %}
 	<div class="title">
 		<b>Event:</b> {{ dbtitle|title }} 
 		<b>Donation Index Total:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
@@ -33,7 +31,6 @@
 		</tr>
 	{% endfor %}
 	</table>
-	{% endcache %}
 	{% if db %}
 	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
 	{% endif %}
