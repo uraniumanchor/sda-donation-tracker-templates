@@ -4,7 +4,7 @@
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} <b>Choice Index</b>
+		<b>Event:</b> {{ dbtitle|title }} <b>Choice Index Total: ${{ total|default_if_none:0.00|floatformat:2 }}</b>
 	</div>
 	<table>
 		<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>

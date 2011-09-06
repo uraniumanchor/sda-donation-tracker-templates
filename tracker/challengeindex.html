@@ -4,7 +4,7 @@
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} <b>Challenges Index</b>
+		<b>Event:</b> {{ dbtitle|title }} <b>Challenges Index Total: ${{ total|default_if_none:0.00|floatformat:2 }}</b>
 	</div>
 	<table>
 		<tr class="header"><td>Game</td><td>Challenge</td><td>Goal</td><td>Amount</td></tr>
