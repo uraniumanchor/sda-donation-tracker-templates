@@ -3,6 +3,8 @@
 {% block title %}Database Does Not Exist{% endblock %}
 
 {% block content %}
-	<p>Selected Database Does Not Exist</p>
+	<div class="title">
+		<b>Selected Database Does Not Exist</b>
+	</div>
 	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
 {% endblock %}

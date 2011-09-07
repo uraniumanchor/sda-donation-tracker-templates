@@ -55,7 +55,7 @@
 			<td><a href="{% url tracker.views.game db=db id=bid.optionId__choice__speedRun %}">{{ bid.optionId__choice__speedRun__name|title }}</a></td>
 			<td><a href="{% url tracker.views.choice db=db id=bid.optionId__choice %}">{{ bid.optionId__choice__name|title }}</a></td>
 			<td><a href="{% url tracker.views.choiceoption db=db id=bid.optionId %}">{{ bid.optionId__name }}</a></td>
-			<td>{{ bid.amount|default_if_none:"0.00"|floatformat:2 }}</td>
+			<td>{{ bid.amount|money }}</td>
 		</tr>
 	{% endfor %}
 	</table>
