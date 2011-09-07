@@ -35,7 +35,7 @@
 		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}{{ comments|yesno:',?comments' }}">{{ comments|yesno:"Hide,Show" }} Comments</a><p>
+	<p><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}{{ comments|yesno:',?comments' }}">{{ comments|yesno:"Hide,Show" }} Comments</a></p>
 	<p><a href="{% url tracker.views.challengeindex db=db %}">Back to Challenge Index</a></p>
 	{% if db %}
 	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
