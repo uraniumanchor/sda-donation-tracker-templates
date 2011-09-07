@@ -20,9 +20,23 @@
 			<td>{{ bid.donation__timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a></td>
 		</tr>
+		{% if comments %}
+			{% if bid.donation__comment|length %}
+			<tr>
+				<td colspan="{{ emails|yesno:'4,3' }}">
+					{{ bid.donation__comment|forumfilter }}
+				</td>
+			</tr>
+			{% endif %}
+		
+			{% if forloop.counter < bids|length %}
+			<tr class="header"><td colspan="{{ emails|yesno:'4,3' }}"></td></tr>
+			{% endif %}
+		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.choiceindex db=db %}">Back to Choice Index</a></p>
+	<p><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}{{ comments|yesno:',?comments' }}">{{ comments|yesno:"Hide,Show" }} Comments</a><p>
+	<p><a href="{% url tracker.views.challengeindex db=db %}">Back to Challenge Index</a></p>
 	{% if db %}
 	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
 	{% endif %}
