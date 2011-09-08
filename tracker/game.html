@@ -1,4 +1,4 @@
-{% extends "tracker/index.html" %}
+{% extends profile.prepend|add:tracker/index.html" %}
 {% load donation_tags %}
 
 {% block title %}Game Detail -- {{ dbtitle|title }}{% endblock %}

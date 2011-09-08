@@ -1,4 +1,4 @@
-{% extends "tracker/index.html" %}
+{% extends profile.prepend|add:tracker/index.html" %}
 {% load i18n %}
 
 {% block title %}Pick a Nickname{% endblock %}

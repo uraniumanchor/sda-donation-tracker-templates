@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends profile.prepend|add:"base.html" %}
 {% load donation_tags %}
 
 {% block title %}{{ dbtitle|title }} -- Index{% endblock %}
