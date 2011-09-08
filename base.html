@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -16,7 +18,7 @@
 {% endblock %}
 </p>
 {% block login %}{% endblock %}
-{% if djangoversion and pythonversion %}<div class="footer">Running on Django {{ djangoversion }} with Python {{ pythonversion }}<br />Python code by UraniumAnchor</div>{% endif %}
+{% if djangoversion and pythonversion %}<div class="footer">{% blocktrans with djangoversion=djangoversion pythonversion=pythonversion %}Running on Django {{ djangoversion }} with Python {{ pythonversion }}{% endblocktrans %}<br />{% trans "Python code by UraniumAnchor" %}</div>{% endif %}
 {% block rendertime %}{% endblock %}
 
 </body>

@@ -1,6 +1,6 @@
 {% load i18n %}
 
 {% if db %}
-<p><a href="{% url tracker.views.index db=db %}">{% blocktrans with dbname=dbtitle|title %}Back to {{ dbname }}{% endblocktrans %}</a></p>
+<p><a href="{% url tracker.views.index db=db %}">{% blocktrans with dbname=dbtitle|title %}Back to {{ dbname }} Index{% endblocktrans %}</a></p>
 {% endif %}
 <p><a href="{% url tracker.views.index %}">{% trans "Back to Main Index" %}</a></p>
