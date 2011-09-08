@@ -21,7 +21,7 @@
 		<tr>
 			<td><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}">{{ challenge.name }}</a></td>
 			<td>{{ challenge.goal|money }}</td>
-			<td>{{ challenge.challengebid__amount__sum|money }}</td>
+			<td>{{ challenge.challengebid__amount__sum|money }} ({{ challenge.challengebid__count }})</td>
 		</tr>
 	{% endfor %}
 	</table>
@@ -44,7 +44,7 @@
 
 			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
 			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a></td>
-			<td>{{ choice.choiceoption__choicebid__amount__sum|money }}</td>
+			<td>{{ choice.choiceoption__choicebid__amount__sum|money }} ({{ choice.choiceoption__choicebid__count }})</td>
 		</tr>
 	{% endfor %}
 	</table>

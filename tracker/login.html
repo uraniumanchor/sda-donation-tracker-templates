@@ -1,14 +1,14 @@
-{% if form.errors %}
+{% if authform.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 <p><a href="{% url django_openid_auth.views.login_begin %}">Log In with a Google Account</a></p>
 <form method="post" action="{% url donations.tracker.views.login %}">
 <fieldset>
 {% csrf_token %}
-{{ form.username.label_tag }}
-{{ form.username }}
-{{ form.password.label_tag }}
-{{ form.password }}
+{{ authform.username.label_tag }}
+{{ authform.username }}
+{{ authform.password.label_tag }}
+{{ authform.password }}
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </fieldset>

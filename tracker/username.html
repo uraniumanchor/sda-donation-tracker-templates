@@ -7,13 +7,13 @@
 <div class="title">
 <b>{% trans 'Pick A Username For This Account' %}</b>
 </div>
-{% if form.errors %}
+{% if usernameform.errors %}
 <p class="errors">{% trans "Please correct errors below:" %}<br />
-    {% if form.username.errors %}
-    <span class="error">{{ form.username.errors|join:", " }}</span>
+    {% if usernameform.username.errors %}
+    <span class="error">{{ usernameform.username.errors|join:", " }}</span>
     {% endif %}
-    {% if form.next.errors %}
-    <span class="error">{{ form.next.errors|join:", " }}</span>
+    {% if usernameform.next.errors %}
+    <span class="error">{{ usernameform.next.errors|join:", " }}</span>
     {% endif %}
 </p>
 {% endif %}
@@ -23,7 +23,7 @@
     {% csrf_token %}
     <fieldset>
         <label for="id_username">{% trans "Username:" %}</label>
-        {{ form.username }}
+        {{ usernameform.username }}
         <input name="bsignin" type="submit" value="{% trans 'Submit' %}" />
  {% if next %}
         <input type="hidden" name="next" value="{{ next }}" />
