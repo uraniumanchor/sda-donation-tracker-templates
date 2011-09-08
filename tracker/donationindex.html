@@ -1,22 +1,23 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Donation Index -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Donation Index" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} 
-		<b>Donation Index Total:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
-		<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
+		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} 
+		<b>{% trans "Donation Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
+		<b>{% trans "Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 	</div>
 	<table>
 		<tr class="header">
-			<td>Name{% sort "name" %}</td>
-			{% if emails %}<td>Email</td>{% endif %}
-			<td>Time Received{% sort "time" %}</td>
-			<td>Amount{% sort "amount" %}</td>
-			{% if emails %}<td>Source</td>{% endif %}
-			<td>Comment</td>
+			<td>{% trans "Name" %}{% sort "name" %}</td>
+			{% if emails %}<td>{% trans "Email" %}</td>{% endif %}
+			<td>{% trans "Time Received" %}{% sort "time" %}</td>
+			<td>{% trans "Amount" %}{% sort "amount" %}</td>
+			{% if emails %}<td>{% trans "Source" %}</td>{% endif %}
+			<td>{% trans "Comment" %}</td>
 		</tr>
 	{% for donation in donations %}
 		<tr>
@@ -27,12 +28,9 @@
 			<td>{{ donation.timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=donation.donationId %}">{{ donation.amount|money }}</a></td>
 			{% if emails %}<td>{{ donation.domain|title }}</td>{% endif %}
-			<td>{% if donation.comment|length %}Yes{% else %}No{% endif %}</td>
+			<td>{% if donation.comment|length %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
 		</tr>
 	{% endfor %}
 	</table>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

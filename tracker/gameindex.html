@@ -1,23 +1,21 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Game Index -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Game Index" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} <b>Game Index</b>
+		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Game Index" %}</b>
 	</div>
 	<table>
-		<tr class="header"><td>Name</td><td>Description</td></tr>
+		<tr class="header"><td>{% trans "Name" %}</td><td>{% trans "Description" %}</td></tr>
 	{% for game in games %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=game.speedRunId %}">{{ game.name|title}}</a></td>
+			<td><a href="{% url tracker.views.game db=db id=game.speedRunId %}">{{ game.name|title }}</a></td>
 			<td>{{ game.description|forumfilter }}</td>
 		</tr>
 	{% endfor %}
 	</table>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

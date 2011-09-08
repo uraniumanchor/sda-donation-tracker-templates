@@ -1,23 +1,24 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Donor Detail -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Donor Detail" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
 		<b>Name:</b> {% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}
 		{% if emails %}<b>Email:</b> <a href="mailto:{{ donor.email }}">{{ donor.email }}</a>{% endif %}
-		{% if donor.alias %}<b>Alias</b> {{ donor.alias }} {% endif %}
+		{% if donor.alias %}<b>{% trans "Alias" %}</b>: {{ donor.alias }} {% endif %}
 		<b>Total Donations:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }}) 
 		<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 	</div>
 	<table>
-		<tr class="header"><td>Time</td><td>Amount</td><td>Comment</td></tr>
+		<tr class="header"><td>{% trans "Time" %}</td><td>{% trans "Amount" %}</td><td>{% trans "Comment" %}</td></tr>
 	{% for donation in donations %}
 		<tr>
 			<td>{{ donation.timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=donation.donationId %}">{{ donation.amount|money }}</a></td>
-			<td>{% if donation.comment|length %}Yes{% else %}No{% endif %}</td>
+			<td>{% if donation.comment|length %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
 		</tr>
 		{% if comments %}
 			{% if donation.comment|length %}
@@ -35,11 +36,10 @@
 	{% endfor %}
 	</table>
 	
-	<p><a href="{% url tracker.views.donor db=db id=donor.donorId %}{{ comments|yesno:',?comments' }}">{{ comments|yesno:"Hide,Show" }} Comments</a></p>
+	<p><a href="{% url tracker.views.donor db=db id=donor.donorId %}{{ comments|yesno:',?comments' }}">
+	{% include profile.prepend|add:"tracker/commentslink.html" %}
+	</a></p>
 
-	<p><a href="{% url tracker.views.donorindex db=db %}">Back to Donor Index</a></p>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}	
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	<p><a href="{% url tracker.views.donorindex db=db %}">{% trans "Back to Donor Index" %}</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

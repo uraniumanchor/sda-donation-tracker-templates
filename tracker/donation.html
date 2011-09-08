@@ -1,18 +1,19 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Donation Detail -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Donation Detail" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Name:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}">
+		<b>{% trans "Name" %}:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}">
 		{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}</a> {% if emails %}(<a href="mailto:{{ donor.email }}">{{ donor.email }}</a>){% endif %}
-		<b>Time Received:</b> {{ donation.timeReceived }} 
-		<b>Amount:</b> {{ donation.amount|money }}
+		<b>{% trans "Time Received" %}:</b> {{ donation.timeReceived }} 
+		<b>{% trans "Amount" %}:</b> {{ donation.amount|money }}
 	</div>
 	{% if donation.comment %}
 	<table>
-		<tr class="header"><td align="center"><b>Comment</b></td></tr>
+		<tr class="header"><td align="center"><b>{% trans "Comment" %}</b></td></tr>
 		<tr><td>
 			{{ donation.comment|forumfilter }}
 		</td></tr>
@@ -20,14 +21,14 @@
 	{% endif %}
 	{% if challengebids %}
 	<div class="header">
-		<a href="{% url tracker.views.challengeindex db=db %}">Challenge Bids</a>
+		<a href="{% url tracker.views.challengeindex db=db %}">{% trans "Challenge Bids" %}</a>
 	</div>
 	<table>
 		<tr class="header">
-			<td>Game</td>
-			<td>Name</td>
-			<td>Goal</td>
-			<td>Amount</td>
+			<td>{% trans "Game" %}</td>
+			<td>{% trans "Name" %}</td>
+			<td>{% trans "Goal" %}</td>
+			<td>{% trans "Amount" %}</td>
 		</tr>
 	{% for bid in challengebids %}
 		<tr>
@@ -41,14 +42,14 @@
 	{% endif %}
 	{% if choicebids %}
 	<div class="header">
-		<a href="{% url tracker.views.choiceindex db=db %}">Choice Bids</a>
+		<a href="{% url tracker.views.choiceindex db=db %}">{% trans "Choice Bids" %}</a>
 	</div>
 	<table>
 		<tr class="header">
-			<td>Game</td>
-			<td>Choice</td>
-			<td>Option</td>
-			<td>Amount</td>
+			<td>{% trans "Game" %}</td>
+			<td>{% trans "Choice" %}</td>
+			<td>{% trans "Option" %}</td>
+			<td>{% trans "Amount" %}</td>
 		</tr>
 	{% for bid in choicebids %}
 		<tr>
@@ -60,13 +61,10 @@
 	{% endfor %}
 	</table>
 	{% endif %}
-	{% if emails %}<p>Donation Source: {{ donation.domain|title }}</p>{% endif %}
+	{% if emails %}<p>{% trans "Donation Source" %}: {{ donation.domain|title }}</p>{% endif %}
 	{% comment %}{% if bidtracker and not db %}
 	<p><a href="{% url tracker.views.choicebidadd db=db id=donation.donationId %}">Attach New Choice Bid</a></p>
 	{% endif %}{% endcomment %}
-	<p><a href="{% url tracker.views.donationindex db=db %}">Back to Donation Index</a></p>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	<p><a href="{% url tracker.views.donationindex db=db %}">{% trans "Back to Donation Index" %}</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

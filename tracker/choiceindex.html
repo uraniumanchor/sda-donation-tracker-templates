@@ -1,14 +1,15 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Choice Index -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Choice Index" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} <b>Choice Index Total:</b> {{ agg.amount__sum|money }}
+		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Choice Index Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
-		<tr class="header"><td>Game</td><td>Choice</td><td>Option</td><td>Amount</td></tr>
+		<tr class="header"><td>{% trans "Game" %}</td><td>{% trans "Choice" %}</td><td>{% trans "Option" %}</td><td>{% trans "Amount" %}</td></tr>
 	{% for choice in choices %}
 		{% ifchanged choice.speedRun__name %}{% if forloop.counter > 1 %}
 		<tr class="header"><td colspan="4"></td></tr>
@@ -21,8 +22,5 @@
 		</tr>
 	{% endfor %}
 	</table>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

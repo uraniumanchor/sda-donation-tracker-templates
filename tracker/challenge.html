@@ -1,16 +1,17 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Challenge Detail -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Challenge Detail" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Game:</b> {{ challenge.speedRun|title }} 
-		<b>Challenge:</b> {{ challenge.name|title }}
-		<b>Total:</b> {{ agg.amount__sum|money }}
+		<b>{% trans "Game" %}:</b> {{ challenge.speedRun|title }} 
+		<b>{% trans "Challenge" %}:</b> {{ challenge.name|title }}
+		<b>{% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
-		<tr class="header"><td>Name</td>{% if emails %}<td>Email</td>{% endif %}<td>Time</td><td>Amount</td></tr>
+		<tr class="header"><td>{% trans "Name" %}</td>{% if emails %}<td>{% trans "Email" %}</td>{% endif %}<td>{% trans "Time" %}</td><td>{% trans "Amount" %}</td></tr>
 	{% for bid in bids %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=bid.donation__donorId %}">
@@ -35,10 +36,9 @@
 		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}{{ comments|yesno:',?comments' }}">{{ comments|yesno:"Hide,Show" }} Comments</a></p>
-	<p><a href="{% url tracker.views.challengeindex db=db %}">Back to Challenge Index</a></p>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	<p><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}{{ comments|yesno:',?comments' }}">
+	{% include profile.prepend|add:"tracker/commentslink.html" %}
+	</a></p>
+	<p><a href="{% url tracker.views.challengeindex db=db %}">{% trans "Back to Challenge Index" %}</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

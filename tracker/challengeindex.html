@@ -1,14 +1,15 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}Challenges Index -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Challenges Index" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Event:</b> {{ dbtitle|title }} <b>Challenges Index Total:</b> {{ agg.amount__sum|money }}
+		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Challenges Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
-		<tr class="header"><td>Game</td><td>Challenge</td><td>Goal</td><td>Amount</td></tr>
+		<tr class="header"><td>{% trans "Game" %}</td><td>{% trans "Challenge" %}</td><td>{% trans "Goal" %}</td><td>{% trans "Amount" %}</td></tr>
 	{% for challenge in challenges %}
 		<tr>
 			<td><a href="{% url tracker.views.game db=db id=challenge.speedRun %}">{{ challenge.speedRun__name|title }}</a></td>
@@ -18,8 +19,5 @@
 		</tr>
 	{% endfor %}
 	</table>
-	{% if db %}
-	<p><a href="{% url tracker.views.index db=db %}">Back to {{ dbtitle|title }} Index</a></p>
-	{% endif %}
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

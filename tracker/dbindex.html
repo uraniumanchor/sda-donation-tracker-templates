@@ -1,10 +1,11 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
+{% load i18n %}
 
-{% block title %}Database Index{% endblock %}
+{% block title %}{% trans "Database Index" %}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>Database Index</b>
+		<b>{% trans "Database Index" %}</b>
 	</div>
 	<table>
 	{% for key,database in databases.items %}
@@ -13,5 +14,5 @@
 		</tr>
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

@@ -1,27 +1,28 @@
 {% extends profile.prepend|add:"base.html" %}
 {% load donation_tags %}
+{% load i18n %}
 
-{% block title %}{{ dbtitle|title }} -- Index{% endblock %}
+{% block title %}{{ dbtitle|title }} -- {% trans "Index" %}{% endblock %}
 
 {% block head %}<link rel="stylesheet" type="text/css" href="{{ static_url }}videoindex.css" />{% endblock %}
 
 {% block content %}
 <div class="title">
-	<b>Event:</b> {{ dbtitle|title }}
-	<b>Donation Total:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
-	<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
+	<b>{% trans "Event:" %}</b> {{ dbtitle|title }}
+	<b>{% trans "Donation Total" %}:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
+	<b>{% trans "Max/Avg Donation" %}:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 </div>
 <p><br /></p>
-<p><a href="{% url tracker.views.gameindex db=db %}">View Games</a></p>
-<p><a href="{% url tracker.views.prizeindex db=db %}">View Prizes</a></p>
-<p><a href="{% url tracker.views.challengeindex db=db %}">View Challenges</a></p>
-<p><a href="{% url tracker.views.choiceindex db=db %}">View Choices</a></p>
-<p><a href="{% url tracker.views.donorindex db=db %}">View Donors</a></p>
-<p><a href="{% url tracker.views.donationindex db=db %}">View Donations</a></p>
+<p><a href="{% url tracker.views.gameindex db=db %}">{% trans "View Games" %}</a></p>
+<p><a href="{% url tracker.views.prizeindex db=db %}">{% trans "View Prizes" %}</a></p>
+<p><a href="{% url tracker.views.challengeindex db=db %}">{% trans "View Challenges" %}</a></p>
+<p><a href="{% url tracker.views.choiceindex db=db %}">{% trans "View Choices" %}</a></p>
+<p><a href="{% url tracker.views.donorindex db=db %}">{% trans "View Donors" %}</a></p>
+<p><a href="{% url tracker.views.donationindex db=db %}">{% trans "View Donations" %}</a></p>
 {% if db %}
-<p><a href="{% url tracker.views.index %}">Back to Main Index</a></p>
+<p><a href="{% url tracker.views.index %}">{% trans "Back to Main Index" %}</a></p>
 {% endif %}
-<p><a href="{% url tracker.views.dbindex %}">Switch Databases</a></p>
+<p><a href="{% url tracker.views.dbindex %}">{% trans "Switch Databases" %}</a></p>
 {% endblock %}
 
 {% block cssfooter %}
@@ -31,7 +32,7 @@
 {% block login %}
 <div class="footer">
 {% if user.is_authenticated %}
-Welcome {{ user.username }} | <a href="{% url tracker.views.logout %}">Logout</a>
+{% trans "Welcome" %} {{ user.username }} | <a href="{% url tracker.views.logout %}">{% trans "Logout" %}</a>
 {% else %}
 {% include "tracker/login.html" %}
 {% endif %}
