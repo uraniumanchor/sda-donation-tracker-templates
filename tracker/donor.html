@@ -6,11 +6,11 @@
 
 {% block content %}
 	<div class="title">
-		<b>Name:</b> {% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}
-		{% if emails %}<b>Email:</b> <a href="mailto:{{ donor.email }}">{{ donor.email }}</a>{% endif %}
+		<b>{% trans "Name" %}:</b> {% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}
+		{% if emails %}<b>{% trans "Email" %}:</b> <a href="mailto:{{ donor.email }}">{{ donor.email }}</a>{% endif %}
 		{% if donor.alias %}<b>{% trans "Alias" %}</b>: {{ donor.alias }} {% endif %}
-		<b>Total Donations:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }}) 
-		<b>Max/Avg Donation:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
+		<b>{% trans "Total Donations" %}:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }}) 
+		<b>{% trans "Max/Avg Donation" %}:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 	</div>
 	<table>
 		<tr class="header"><td>{% trans "Time" %}</td><td>{% trans "Amount" %}</td><td>{% trans "Comment" %}</td></tr>

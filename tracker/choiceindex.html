@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Choice Index Total" %}:</b> {{ agg.amount__sum|money }}
+		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Choice Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
 		<tr class="header"><td>{% trans "Game" %}</td><td>{% trans "Choice" %}</td><td>{% trans "Option" %}</td><td>{% trans "Amount" %}</td></tr>
