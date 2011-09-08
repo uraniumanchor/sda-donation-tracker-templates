@@ -13,7 +13,7 @@
 		<b>{% trans "Max/Avg Donation" %}:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 	</div>
 	<table>
-		<tr class="header"><td>{% trans "Time" %}</td><td>{% trans "Amount" %}</td><td>{% trans "Comment" %}</td></tr>
+		<tr class="header"><td>{% trans "Time Received" %}</td><td>{% trans "Amount" %}</td><td>{% trans "Comment" %}</td></tr>
 	{% for donation in donations %}
 		<tr>
 			<td>{{ donation.timeReceived }}</td>

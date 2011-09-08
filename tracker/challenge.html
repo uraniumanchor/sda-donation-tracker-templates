@@ -11,7 +11,7 @@
 		<b>{% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
-		<tr class="header"><td>{% trans "Name" %}</td>{% if emails %}<td>{% trans "Email" %}</td>{% endif %}<td>{% trans "Time" %}</td><td>{% trans "Amount" %}</td></tr>
+		<tr class="header"><td>{% trans "Name" %}</td>{% if emails %}<td>{% trans "Email" %}</td>{% endif %}<td>{% trans "Time Received" %}</td><td>{% trans "Amount" %}</td></tr>
 	{% for bid in bids %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=bid.donation__donorId %}">

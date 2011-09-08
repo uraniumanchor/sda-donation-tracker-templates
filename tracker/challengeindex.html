@@ -2,11 +2,11 @@
 {% load donation_tags %}
 {% load i18n %}
 
-{% block title %}{% trans "Challenges Index" %} -- {{ dbtitle|title }}{% endblock %}
+{% block title %}{% trans "Challenge Index" %} -- {{ dbtitle|title }}{% endblock %}
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Challenges Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }}
+		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Challenge Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
 	<table>
 		<tr class="header"><td>{% trans "Game" %}</td><td>{% trans "Challenge" %}</td><td>{% trans "Goal" %}</td><td>{% trans "Amount" %}</td></tr>
