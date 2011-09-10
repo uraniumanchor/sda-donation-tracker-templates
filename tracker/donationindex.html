@@ -20,7 +20,7 @@
 			{% if emails %}<td>{% trans "Source" %}</td>{% endif %}
 			<td>{% trans "Comment" %}</td>
 		</tr>
-	{% cache 300 donations db agg.amount__count usernames emails %}
+	{% cache 300 donations db agg.amount__count usernames emails sort order fulllist %}
 	{% for donation in donations %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=donation.donorId %}">
