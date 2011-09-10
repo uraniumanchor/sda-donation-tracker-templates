@@ -19,9 +19,9 @@
 	{% for donor in donors %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=donor.donorId %}">
-				{% if usernames %}{{ donor.lastName }}{% else %}{{ donor.lastName|slice:":1" }}...{% endif %}, {{ donor.firstName }}
+				{% name donor.firstName donor.lastName usernames %}
 			</a></td>
-			{% if emails %}<td><a href="mailto:{{ donor.email }}">{{ donor.email }}</a></td>{% endif %}
+			{% email donor.email emails "<td>.</td>" %}
 			<td>{{ donor.alias }}</td>
 			<td>{{ donor.donation__amount__sum|money }} ({{ donor.donation__amount__count }})</td>
 			<td>{{ donor.donation__amount__max|money }}/{{ donor.donation__amount__avg|money }}</td>

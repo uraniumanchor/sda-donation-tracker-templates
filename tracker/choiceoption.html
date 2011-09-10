@@ -21,9 +21,9 @@
 	{% for choicebid in choicebids %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=choicebid.donationId__donorId %}">
-				{% if usernames %}{{ choicebid.donationId__donorId__lastName}}{% else %}{{ choicebid.donationId__donorId__lastName|slice:":1"}}...{% endif %}, {{ choicebid.donationId__donorId__firstName }}
+				{% name choicebid.donationId__donorId__firstName choicebid.donationId__donorId__lastName usernames %}
 			</a></td>
-			{% if emails %}<td><a href="mailto:{{ choicebid.donationId__donorId__email }}">{{ choicebid.donationId__donorId__email }}</a></td>{% endif %}
+			{% email choicebid.donationId__donorId__email emails "<td>.</td>" %}
 			<td>{{ choicebid.donationId__timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=choicebid.donationId %}">{{ choicebid.amount|money }}</a></td>
 		</tr>

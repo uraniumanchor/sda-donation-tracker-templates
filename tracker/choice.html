@@ -33,9 +33,9 @@
 			{% if bid.optionId == option.optionId %}
 			<tr>
 				<td {% if not emails %}colspan="2"{% endif %}><a href="{% url tracker.views.donor db=db id=bid.donationId__donorId %}">
-					{% if usernames %}{{ bid.donationId__donorId__lastName}}{% else %}{{ bid.donationId__donorId__lastName|slice:":1"}}...{% endif %}, {{ bid.donationId__donorId__firstName }}
+					{% name bid.donationId__donorId__firstName bid.donationId__donorId__lastName usernames %}
 				</a></td>
-				{% if emails %}<td><a href="mailto:{{ bid.donationId__donorId__email }}">{{ bid.donationId__donorId__email }}</a></td>{% endif %}
+				{% email bid.donationId__donorId__email emails "<td>.</td>" %}
 				<td>{{ bid.donationId__timeReceived }}</td>
 				<td><a href="{% url tracker.views.donation db=db id=bid.donationId %}">{{ bid.amount|money }}</a></td>
 			</tr>

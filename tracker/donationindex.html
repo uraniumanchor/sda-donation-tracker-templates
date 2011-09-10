@@ -22,9 +22,9 @@
 	{% for donation in donations %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=donation.donorId %}">
-				{% if usernames %}{{ donation.donorId__lastName }}{% else %}{{ donation.donorId__lastName|slice:":1" }}...{% endif %}, {{ donation.donorId__firstName }}
+				{% name donation.donorId__firstName donation.donorId__lastName usernames %}
 			</a></td>
-			{% if emails %}<td><a href="mailto:{{ donation.donorId__email }}">{{ donation.donorId__email }}</a></td>{% endif %}
+			{% email donation.donorId__email emails "<td>.</td>" %}
 			<td>{{ donation.timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=donation.donationId %}">{{ donation.amount|money }}</a></td>
 			{% if emails %}<td>{{ donation.domain|title }}</td>{% endif %}
