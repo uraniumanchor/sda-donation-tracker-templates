@@ -1,6 +1,7 @@
 {% extends profile.prepend|add:"tracker/index.html" %}
 {% load donation_tags %}
 {% load i18n %}
+{% load cache %}
 
 {% block title %}{% trans "Donor Index" %} -- {{ dbtitle|title }}{% endblock %}
 
@@ -16,6 +17,7 @@
 			<td>{% trans "Total" %}{% sort "total" %}</td>
 			<td>{% trans "Max" %}{% sort "max" %}/{% trans "Avg" %}{% sort "avg" %} {% trans "Donation" %}</td>
 		</tr>
+	{% cache 300 donors db agg.amount__count usernames emails %}
 	{% for donor in donors %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=donor.donorId %}">
@@ -27,6 +29,7 @@
 			<td>{{ donor.donation__amount__max|money }}/{{ donor.donation__amount__avg|money }}</td>
 		</tr>
 	{% endfor %}
+	{% endcache %}
 	</table>
 	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}
