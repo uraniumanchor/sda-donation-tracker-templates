@@ -26,7 +26,7 @@
 		</tr>
 	{% for marker in markers %}
 		<tr>
-			<td><a href='marker/{{marker.id}}/'>{{ marker.name }}</a></td><td align='right'>{{ marker.pt }}</td><td align='right'>{{ marker.c }} ({{ marker.pct }}%)</td>
+			<td><a href='{% url swatch.views.marker game=game.id id=marker.markerid %}'>{{ marker.name }}</a></td><td align='right'>{{ marker.pt }}</td><td align='right'>{{ marker.c }} ({{ marker.pct }}%)</td>
 			<td align='right'>{{ marker.mt }}</td>
 			<td align='right'>{{ marker.xt }}</td>
 			<td align='right'>{{ marker.avt }}</td>

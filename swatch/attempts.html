@@ -11,7 +11,16 @@
 		<table>
 			<tr class='header'><td align='right'><b>#</b></td><td align='right'><b>Marker</b></td></tr>
 		{% for attempt in attempts %}
-			<tr><td align='right'>{{ forloop.counter }}</td><td align='right'>{{ attempt.marker__name }} ({{ attempt.marker__markerid }})</td></tr>
+			<tr>
+				<td align='right'>{{ forloop.counter }}</td>
+				<td align='right'>
+				{% if attempt.marker__markerid > 0 %}
+					<a href='{% url swatch.views.marker game=game.id id=attempt.marker__markerid %}'>{{ attempt.marker__name }}</a>
+				{% else %}
+					{{ attempt.marker__name }}
+				{% endif %}
+					({{ attempt.marker__markerid }})</td>
+			</tr>
 		{% endfor %}
 		</table>
 	{% else %}

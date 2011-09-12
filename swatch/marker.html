@@ -10,12 +10,12 @@
 	<table>
 	<tr class='header'><td><b>Name:</b></td><td align='right'>{{ marker.name }}</td></tr>
 	<tr><td><b>Goal Time:</b></td><td align='right'>{{ marker.pt }}</td></tr>
-	{% if times.c > 0 %}
+	{% if times|length > 0 %}
 		<tr><td><b>Min Time:</b></td><td align='right'>{{ marker.mt }}</td></tr>
-		<tr><td><b>Min Segment:</b></td><td align='right'>{{ marker.ms }}</td></tr>
 		<tr><td><b>Max Time:</b></td><td align='right'>{{ marker.xt }}</td></tr>
-		<tr><td><b>Max Segment:</b></td><td align='right'>{{ marker.xs }}</td></tr>
 		<tr><td><b>Avg Time:</b></td><td align='right'>{{ marker.avt }}</td></tr>
+		<tr><td><b>Min Segment:</b></td><td align='right'>{{ marker.ms }}</td></tr>
+		<tr><td><b>Max Segment:</b></td><td align='right'>{{ marker.xs }}</td></tr>
 		<tr><td><b>Avg Segment:</b></td><td align='right'>{{ marker.avs }}</td></tr>
 	</table>
 	<table>
@@ -28,6 +28,6 @@
 	</table>
 	<p>No times for this marker yet</p>
 	{% endif %}
-	<p><a href='{% url swatch.views.game game=marker.game %}'>Back to {{ marker.game__name }}</a></p>
+	<p><a href='{% url swatch.views.game game=game.id %}'>Back to {{ game.name }}</a></p>
 	<p><a href='{% url swatch.views.index %}'>Back to Index</a></p>
 {% endblock %}
