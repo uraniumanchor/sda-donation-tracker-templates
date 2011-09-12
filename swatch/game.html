@@ -2,16 +2,20 @@
 
 {% block title %}Game Detail{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="http://static.uranium-anchor.com/videoindex.css" />
+{% endblock %}
+
 {% block content %}
-	<table border=4 cellpadding=4>
-		<tr><td><b>Name:</b></td><td align='right'>{{ game.name }}</td></tr>
+	<table>
+		<tr class='header'><td><b>Name:</b></td><td align='right'>{{ game.name }}</td></tr>
 		<tr><td><b>Goal Time:</b></td><td align='right'>{{ game.lasttime }}</td></tr>
 		<tr><td><b>Marker Count:</b></td><td align='right'>{{ game.markercount }}</td></tr>
 		<tr><td><b>Attempt Count:</b></td><td align='right'>{{ game.attemptcount }}</td></tr>
 	</table>
 	{% if markers %}
-	<table border=4 cellpadding=4>
-		<tr align='right'>
+	<table>
+		<tr align='right' class='header'>
 			<td><b>Name</b></td><td><b>Goal Time</b></td><td><b>#</b></td>
 			<td><b>Min</b></td>
 			<td><b>Max</b></td>
@@ -38,5 +42,5 @@
 {% else %}
 	<p>No markers defined.</p>
 {% endif %}
-
+	<p><a href='{% url swatch.views.index %}'>Back to Index</a></p>
 {% endblock %}

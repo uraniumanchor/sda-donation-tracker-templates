@@ -2,14 +2,21 @@
 
 {% block title %}Attempts List{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="http://static.uranium-anchor.com/videoindex.css" />
+{% endblock %}
+
 {% block content %}
 	{% if attempts %}
-		<table border=4 cellpadding=4>
-			<tr><td align='right'><b>#</b></td><td align='right'><b>Marker</b></td></tr>
+		<table>
+			<tr class='header'><td align='right'><b>#</b></td><td align='right'><b>Marker</b></td></tr>
 		{% for attempt in attempts %}
-			<tr><td align='right'>{{ forloop.counter }}</td><td align='right'>{{ attempt.pm }}</td></tr>
+			<tr><td align='right'>{{ forloop.counter }}</td><td align='right'>{{ attempt.marker__name }} ({{ attempt.marker__markerid }})</td></tr>
 		{% endfor %}
+		</table>
 	{% else %}
 		<p>No Attempts yet</p>
 	{% endif %}
+	<p><a href='{% url swatch.views.game game=game.id %}'>Back to {{ game.name }}</a></p>
+	<p><a href='{% url swatch.views.index %}'>Back to Index</a></p>
 {% endblock %}

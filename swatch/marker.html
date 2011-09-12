@@ -2,24 +2,32 @@
 
 {% block title %}Marker Detail{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="http://static.uranium-anchor.com/videoindex.css" />
+{% endblock %}
+
 {% block content %}
-	<table border=4 cellpadding=4>
-	<tr><td><b>Name:</b></td><td align='right'>{{ marker.name }}</td></tr>
+	<table>
+	<tr class='header'><td><b>Name:</b></td><td align='right'>{{ marker.name }}</td></tr>
 	<tr><td><b>Goal Time:</b></td><td align='right'>{{ marker.pt }}</td></tr>
-	{% if tc > 0 %}
+	{% if times.c > 0 %}
 		<tr><td><b>Min Time:</b></td><td align='right'>{{ marker.mt }}</td></tr>
 		<tr><td><b>Min Segment:</b></td><td align='right'>{{ marker.ms }}</td></tr>
 		<tr><td><b>Max Time:</b></td><td align='right'>{{ marker.xt }}</td></tr>
 		<tr><td><b>Max Segment:</b></td><td align='right'>{{ marker.xs }}</td></tr>
 		<tr><td><b>Avg Time:</b></td><td align='right'>{{ marker.avt }}</td></tr>
 		<tr><td><b>Avg Segment:</b></td><td align='right'>{{ marker.avs }}</td></tr>
-		<table border=4 cellpadding=4>
-			<tr><td align='right'><b>Total</b></td><td align='right'><b>Segment</b></td></tr>
-		{% for time in times %}
-			<tr><td align='right'>{{ time.pt }}</td><td align='right'>{{ time.pst }}</td></tr>
-		{% endfor %}
-		</table>
+	</table>
+	<table>
+		<tr class='header'><td align='right'><b>Total</b></td><td align='right'><b>Segment</b></td></tr>
+	{% for time in times %}
+		<tr><td align='right'>{{ time.pt }}</td><td align='right'>{{ time.pst }}</td></tr>
+	{% endfor %}
+	</table>
 	{% else %}
-		<p>No times for this marker yet</p>
+	</table>
+	<p>No times for this marker yet</p>
 	{% endif %}
+	<p><a href='{% url swatch.views.game game=marker.game %}'>Back to {{ marker.game__name }}</a></p>
+	<p><a href='{% url swatch.views.index %}'>Back to Index</a></p>
 {% endblock %}

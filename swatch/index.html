@@ -2,14 +2,19 @@
 
 {% block title %}Game List{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="http://static.uranium-anchor.com/videoindex.css" />
+{% endblock %}
+
 {% block content %}
 	{% if games %}
-		<table border=4 cellpadding=4>
+		<table>
 		{% for game in games %}
-			<tr><td><a href='game/{{ game.id }}/'>{{ game.name }}</a></td></tr>
+			<tr><td><a href='{% url swatch.views.game game=game.id %}'>{{ game.name }}</a></td></tr>
 		{% endfor %}
 		</table>
 	{% else %}
-		No games yet.
+		<p>No games yet.</p>
 	{% endif %}
+	
 {% endblock %}
