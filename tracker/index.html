@@ -8,7 +8,7 @@
 
 {% block content %}
 <div class="title">
-	<b>{% trans "Event:" %}</b> {{ dbtitle|title }}
+	<b>{% trans "Event" %}:</b> {{ dbtitle|title }}
 	<b>{% trans "Donation Total" %}:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
 	<b>{% trans "Max/Avg Donation" %}:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 </div>

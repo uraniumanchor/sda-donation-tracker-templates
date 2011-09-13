@@ -14,7 +14,7 @@ input.openid {
 <body>
 <h1>Sign in with your OpenID</h1>
 {% if form.errors %}
-<p class="errors">{% trans "Please correct errors below:" %}<br />
+<p class="errors">{% trans "Please correct errors below" %}:<br />
     {% if form.openid_identifier.errors %}
     <span class="error">{{ form.openid_identifier.errors|join:", " }}</span>
     {% endif %}
@@ -28,7 +28,7 @@ input.openid {
     <fieldset>
         <legend>{% trans "Sign In Using Your OpenID" %}</legend>
         <div class="form-row">
-            <label for="id_openid_identifier">{% trans "OpenID:" %}</label><br />
+            <label for="id_openid_identifier">{% trans "OpenID" %}:</label><br />
             {{ form.openid_identifier }}
         </div>
         <div class="submit-row ">
