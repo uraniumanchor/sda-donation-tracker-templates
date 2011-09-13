@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="title">
 		<b>{% trans "Name" %}:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}">
-		{% name donor.firstName donor.lastName usernames %} {% if emails %}({% email donor.email %}){% endif %}
+		{% name donor.firstName donor.lastName usernames %}</a> {% if emails %}({% email donor.email %}){% endif %}
 		<b>{% trans "Time Received" %}:</b> {{ donation.timeReceived }} 
 		<b>{% trans "Amount" %}:</b> {{ donation.amount|money }}
 	</div>
