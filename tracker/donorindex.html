@@ -17,7 +17,7 @@
 			<td>{% trans "Total" %}{% sort "total" %}</td>
 			<td>{% trans "Max" %}{% sort "max" %}/{% trans "Avg" %}{% sort "avg" %} {% trans "Donation" %}</td>
 		</tr>
-	{% cache 300 donors db agg.amount__count usernames emails sort order %}
+	{% cache 1800 donors LANGUAGE_CODE db agg.amount__count usernames emails sort order %}
 	{% for donor in donors %}
 		<tr>
 			<td><a href="{% url tracker.views.donor db=db id=donor.donorId %}">
