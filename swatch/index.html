@@ -9,11 +9,11 @@
 {% block content %}
 	<div style="display:block; margin-left:auto; margin-right:auto; width:{{ showchat|yesno:'1200,600' }}px; height:500px">
 		<div style="display:inline; position:relative; top:25px; width: 600px; height:450px">
-			<object type="application/x-shockwave-flash" height="450" width="600" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=uraniumanchor" bgcolor="#000000"><param name="allowFullScreen" value="true" style="position:relative; left:0px;"/><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&channel=uraniumanchor&auto_play=false&start_volume=25" /></object><a href="http://www.twitch.tv/uraniumanchor#r=-rid-&amp;s=em" class="trk" style="position:relative; left: -{{ showchat|yesno:'300,0' }}px; top:25px; padding:2px 0px 4px; display:block; font-weight:normal; font-size:10px; text-decoration:underline; text-align:center;">Watch live video from house-of-cake on www.twitch.tv</a>
+			<object type="application/x-shockwave-flash" height="450" width="600" id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=uraniumanchor" bgcolor="#000000"><param name="allowFullScreen" value="true" style="position:relative; left:0px;"/><param name="allowScriptAccess" value="always" /><param name="allowNetworking" value="all" /><param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" /><param name="flashvars" value="hostname=www.twitch.tv&amp;channel=uraniumanchor&amp;auto_play=false&amp;start_volume=25" /></object><a href="http://www.twitch.tv/uraniumanchor#r=-rid-&amp;s=em" class="trk" style="position:relative; left: -{{ showchat|yesno:'300,0' }}px; top:25px; padding:2px 0px 4px; display:block; font-weight:normal; font-size:10px; text-decoration:underline; text-align:center;">Watch live video from house-of-cake on www.twitch.tv</a>
 		</div>
 		{% if showchat %}
 		<div style="display:inline; position:relative; left:600px; top:-447px; text-align:center;">	
-			<iframe width="600" height="450" frameborder="0" src="http://widget.mibbit.com/?settings=26495c21303adc8430f9b5e310f3bd93&server=irc.speeddemosarchive.com&channel=%23houseofcake"></iframe>
+			<iframe width="600" height="450" frameborder="0" src="http://widget.mibbit.com/?settings=26495c21303adc8430f9b5e310f3bd93&amp;server=irc.speeddemosarchive.com&amp;channel=%23houseofcake"></iframe>
 			<p style="display:inline; position:relative; left:40px; text-align:center; white-space:pre-line;">
 			Want to use an irc client? Point it at irc.speeddemosarchive.com and join <a href="irc://irc.speeddemosarchive.com/houseofcake/">#houseofcake</a>!
 			</p>
@@ -34,4 +34,7 @@
 		<p>No games yet.</p>
 	{% endif %}
 	
+{% endblock %}
+
+{% block xhtmlfooter %}
 {% endblock %}
