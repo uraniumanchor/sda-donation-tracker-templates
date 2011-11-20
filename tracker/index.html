@@ -13,12 +13,12 @@
 	<b>{% trans "Max/Avg Donation" %}:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
 </div>
 <p><br /></p>
-<p><a href="{% url tracker.views.gameindex db=db %}">{% trans "View Games" %}</a></p>
-<p><a href="{% url tracker.views.prizeindex db=db %}">{% trans "View Prizes" %}</a></p>
-<p><a href="{% url tracker.views.challengeindex db=db %}">{% trans "View Challenges" %}</a></p>
-<p><a href="{% url tracker.views.choiceindex db=db %}">{% trans "View Choices" %}</a></p>
-<p><a href="{% url tracker.views.donorindex db=db %}">{% trans "View Donors" %}</a></p>
-<p><a href="{% url tracker.views.donationindex db=db %}">{% trans "View Donations" %}</a></p>
+<p><a href="{% url tracker.views.gameindex db=db %}">{% trans "View Games" %}</a> ({{ count.games }})</p>
+<p><a href="{% url tracker.views.prizeindex db=db %}">{% trans "View Prizes" %}</a> ({{ count.prizes }})</p>
+<p><a href="{% url tracker.views.challengeindex db=db %}">{% trans "View Challenges" %}</a> ({{ count.challenges }})</p>
+<p><a href="{% url tracker.views.choiceindex db=db %}">{% trans "View Choices" %}</a> ({{ count.choices }})</p>
+<p><a href="{% url tracker.views.donorindex db=db %}">{% trans "View Donors" %}</a> ({{ count.donors }})</p>
+<p><a href="{% url tracker.views.donationindex db=db %}">{% trans "View Donations" %}</a> ({{ agg.amount__count }})</p>
 {% if db %}
 <p><a href="{% url tracker.views.index %}">{% trans "Back to Main Index" %}</a></p>
 {% endif %}
