@@ -13,7 +13,7 @@
 	{% for challenge in challenges %}
 		<tr>
 			<td><a href="{% url tracker.views.game db=db id=challenge.speedRun %}">{{ challenge.speedRun__name|title }}</a></td>
-			<td><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}">{{ challenge.name|title }}</a></td>
+			<td><a href="{% url tracker.views.challenge db=db id=challenge.id %}">{{ challenge.name|title }}</a></td>
 			<td>{{ challenge.goal|money }}</td>
 			<td>{{ challenge.challengebid__amount__sum|money }} ({{ challenge.challengebid__count }}) </td>
 		</tr>

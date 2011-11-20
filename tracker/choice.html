@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Game" %}:</b> {{ choice.speedRun|title }} 
+		<b>{% trans "Game" %}:</b> <a href="{% url tracker.views.game db=db id=choice.speedRun.id %}">{{ choice.speedRun.name|title }}</a>
 		<b>{% trans "Choice" %}:</b> {{ choice.name|title }}
 		<b>{% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
@@ -19,7 +19,7 @@
 		<tr class="header"><td colspan="3" align="center">{% trans "Option" %}</td><td colspan="1">{% trans "Amount" %}</td></tr>
 		{% endif %}
 		<tr>
-			<td colspan="3" {% if comments %}align="center"{% endif %}><a href="{% url tracker.views.choiceoption db=db id=option.optionId %}">{{ option.name }}</a></td>
+			<td colspan="3" {% if comments %}align="center"{% endif %}><a href="{% url tracker.views.choiceoption db=db id=option.id %}">{{ option.name }}</a></td>
 			<td colspan="1">{{ option.choicebid__amount__sum|money }} ({{option.choicebid__amount__count}})</td>
 		</tr>
 		{% if comments and option.choicebid__amount__count > 0 %}
@@ -32,16 +32,16 @@
 		{% for bid in choicebids %}
 			{% if bid.optionId == option.optionId %}
 			<tr>
-				<td {% if not emails %}colspan="2"{% endif %}><a href="{% url tracker.views.donor db=db id=bid.donationId__donorId %}">
-					{% name bid.donationId__donorId__firstName bid.donationId__donorId__lastName usernames %}
+				<td {% if not emails %}colspan="2"{% endif %}><a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
+					{% name bid.donation__donor__firstName bid.donation__donor__lastName usernames %}
 				</a></td>
-				{% email bid.donationId__donorId__email emails "<td>.</td>" %}
-				<td>{{ bid.donationId__timeReceived }}</td>
-				<td><a href="{% url tracker.views.donation db=db id=bid.donationId %}">{{ bid.amount|money }}</a></td>
+				{% email bid.donation__donor__email emails "<td>.</td>" %}
+				<td>{{ bid.donation__timeReceived }}</td>
+				<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a></td>
 			</tr>
 			<tr>
 				<td colspan="4">
-					{{ bid.donationId__comment|forumfilter }}
+					{{ bid.donation__comment|forumfilter }}
 				</td>
 			</tr>
 			{% comment %}{% if forloop.counter < option.choicebid__amount__count %}
@@ -52,7 +52,7 @@
 		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.choice db=db id=choice.choiceId %}{{ comments|yesno:',?comments' }}">
+	<p><a href="{% url tracker.views.choice db=db id=choice.id %}{{ comments|yesno:',?comments' }}">
 	{% include profile.prepend|add:"tracker/commentslink.html" %}
 	</a></p>
 	<p><a href="{% url tracker.views.choiceindex db=db %}">{% trans "Back to Choice Index" %}</a></p>

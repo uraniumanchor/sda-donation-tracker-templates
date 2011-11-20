@@ -12,7 +12,7 @@
 		<tr class="header"><td>{% trans "Name" %}</td><td>{% trans "Description" %}</td></tr>
 	{% for game in games %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=game.speedRunId %}">{{ game.name|title }}</a></td>
+			<td><a href="{% url tracker.views.game db=db id=game.id %}">{{ game.name|title }}</a></td>
 			<td>{{ game.description|forumfilter }}</td>
 		</tr>
 	{% endfor %}

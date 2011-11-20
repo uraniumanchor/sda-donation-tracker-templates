@@ -6,8 +6,8 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Game" %}:</b> <a href="{% url tracker.views.game db=db id=choiceoption.choice.speedRun.speedRunId %}">{{ choiceoption.choice.speedRun|title }}</a>
-		<b>{% trans "Choice" %}:</b> <a href="{% url tracker.views.choice db=db id=choiceoption.choice.choiceId %}">{{ choiceoption.choice.name|title }}</a> 
+		<b>{% trans "Game" %}:</b> <a href="{% url tracker.views.game db=db id=choiceoption.choice.speedRun.id %}">{{ choiceoption.choice.speedRun|title }}</a>
+		<b>{% trans "Choice" %}:</b> <a href="{% url tracker.views.choice db=db id=choiceoption.choice.id %}">{{ choiceoption.choice.name|title }}</a> 
 		<b>{% trans "Option" %}:</b> {{ choiceoption.name }}
 		<b>{% trans "Total" %}:</b> {{ agg.amount__sum|money }}
 	</div>
@@ -20,12 +20,12 @@
 		</tr>
 	{% for choicebid in choicebids %}
 		<tr>
-			<td><a href="{% url tracker.views.donor db=db id=choicebid.donationId__donorId %}">
-				{% name choicebid.donationId__donorId__firstName choicebid.donationId__donorId__lastName usernames %}
+			<td><a href="{% url tracker.views.donor db=db id=choicebid.donation__donor %}">
+				{% name choicebid.donation__donor__firstName choicebid.donation__donor__lastName usernames %}
 			</a></td>
-			{% email choicebid.donationId__donorId__email emails "<td>.</td>" %}
-			<td>{{ choicebid.donationId__timeReceived }}</td>
-			<td><a href="{% url tracker.views.donation db=db id=choicebid.donationId %}">{{ choicebid.amount|money }}</a></td>
+			{% email choicebid.donation__donor__email emails "<td>.</td>" %}
+			<td>{{ choicebid.donation__timeReceived }}</td>
+			<td><a href="{% url tracker.views.donation db=db id=choicebid.donation %}">{{ choicebid.amount|money }}</a></td>
 		</tr>
 		{% if comments %}
 			{% if choicebid.donationId__comment|length %}
@@ -42,7 +42,7 @@
 		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.choiceoption db=db id=choiceoption.optionId %}{{ comments|yesno:',?comments' }}">
+	<p><a href="{% url tracker.views.choiceoption db=db id=choiceoption.id %}{{ comments|yesno:',?comments' }}">
 	{% include profile.prepend|add:"tracker/commentslink.html" %}
 	</a></p>
 	<p><a href="{% url tracker.views.choiceindex db=db %}">{% trans "Back to Choice Index" %}</a></p>

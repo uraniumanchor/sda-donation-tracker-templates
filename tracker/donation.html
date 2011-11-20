@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Name" %}:</b> <a href="{% url tracker.views.donor db=db id=donor.donorId %}">
+		<b>{% trans "Name" %}:</b> <a href="{% url tracker.views.donor db=db id=donor.id %}">
 		{% name donor.firstName donor.lastName usernames %}</a> {% if emails %}({% email donor.email %}){% endif %}
 		<b>{% trans "Time Received" %}:</b> {{ donation.timeReceived }} 
 		<b>{% trans "Amount" %}:</b> {{ donation.amount|money }}
@@ -53,9 +53,9 @@
 		</tr>
 	{% for bid in choicebids %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=bid.optionId__choice__speedRun %}">{{ bid.optionId__choice__speedRun__name|title }}</a></td>
-			<td><a href="{% url tracker.views.choice db=db id=bid.optionId__choice %}">{{ bid.optionId__choice__name|title }}</a></td>
-			<td><a href="{% url tracker.views.choiceoption db=db id=bid.optionId %}">{{ bid.optionId__name }}</a></td>
+			<td><a href="{% url tracker.views.game db=db id=bid.choiceOption__choice__speedRun %}">{{ bid.choiceOption__choice__speedRun__name|title }}</a></td>
+			<td><a href="{% url tracker.views.choice db=db id=bid.choiceOption__choice %}">{{ bid.choiceOption__choice__name|title }}</a></td>
+			<td><a href="{% url tracker.views.choiceoption db=db id=bid.choiceOption %}">{{ bid.choiceOption__name }}</a></td>
 			<td>{{ bid.amount|money }}</td>
 		</tr>
 	{% endfor %}
@@ -63,7 +63,7 @@
 	{% endif %}
 	{% if emails %}<p>{% trans "Donation Source" %}: {{ donation.domain|title }}</p>{% endif %}
 	{% comment %}{% if bidtracker and not db %}
-	<p><a href="{% url tracker.views.choicebidadd db=db id=donation.donationId %}">Attach New Choice Bid</a></p>
+	<p><a href="{% url tracker.views.choicebidadd db=db id=donation.id %}">Attach New Choice Bid</a></p>
 	{% endif %}{% endcomment %}
 	<p><a href="{% url tracker.views.donationindex db=db %}">{% trans "Back to Donation Index" %}</a></p>
 	{% include profile.prepend|add:"tracker/navfooter.html" %}

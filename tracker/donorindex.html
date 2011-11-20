@@ -19,15 +19,17 @@
 		</tr>
 	{% cache 1800 donors LANGUAGE_CODE db agg.amount__count usernames emails sort order %}
 	{% for donor in donors %}
-		<tr>
-			<td><a href="{% url tracker.views.donor db=db id=donor.donorId %}">
-				{% name donor.firstName donor.lastName usernames %}
-			</a></td>
-			{% email donor.email emails "<td>.</td>" %}
-			<td>{{ donor.alias }}</td>
-			<td>{{ donor.donation__amount__sum|money }} ({{ donor.donation__amount__count }})</td>
-			<td>{{ donor.donation__amount__max|money }}/{{ donor.donation__amount__avg|money }}</td>
-		</tr>
+		{% if donor.donation__amount__count > 0 %}
+			<tr>
+				<td><a href="{% url tracker.views.donor db=db id=donor.id %}">
+					{% name donor.firstName donor.lastName usernames %}
+				</a></td>
+				{% email donor.email emails "<td>.</td>" %}
+				<td>{{ donor.alias }}</td>
+				<td>{{ donor.donation__amount__sum|money }} ({{ donor.donation__amount__count }})</td>
+				<td>{{ donor.donation__amount__max|money }}/{{ donor.donation__amount__avg|money }}</td>
+			</tr>
+		{% endif %}
 	{% endfor %}
 	{% endcache %}
 	</table>

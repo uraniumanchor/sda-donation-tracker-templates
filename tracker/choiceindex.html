@@ -16,7 +16,7 @@
 		{% endif %}{% endifchanged %}
 		<tr>
 			<td><a href="{% url tracker.views.game db=db id=choice.speedRun %}">{{ choice.speedRun__name|title }}</a></td>
-			<td><a href="{% url tracker.views.choice db=db id=choice.choiceId %}">{{ choice.name|title }}</a></td>
+			<td><a href="{% url tracker.views.choice db=db id=choice.id %}">{{ choice.name|title }}</a></td>
 			<td><a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a></td>
 			<td>{{ choice.choiceoption__choicebid__amount__sum|money }} ({{ choice.choiceoption__choicebid__count }})</td>
 		</tr>

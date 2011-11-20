@@ -14,10 +14,10 @@
 		<tr class="header"><td>{% trans "Name" %}</td>{% if emails %}<td>{% trans "Email" %}</td>{% endif %}<td>{% trans "Time Received" %}</td><td>{% trans "Amount" %}</td></tr>
 	{% for bid in bids %}
 		<tr>
-			<td><a href="{% url tracker.views.donor db=db id=bid.donation__donorId %}">
-				{% name bid.donation__donorId__firstName bid.donation__donorId__lastName usernames %}
+			<td><a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
+				{% name bid.donation__donor__firstName bid.donation__donor__lastName usernames %}
 			</a></td>
-			{% email bid.donation__donorId__email emails "<td>.</td>" %}
+			{% email bid.donation__donor__email emails "<td>.</td>" %}
 			<td>{{ bid.donation__timeReceived }}</td>
 			<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a></td>
 		</tr>
@@ -36,7 +36,7 @@
 		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.challenge db=db id=challenge.challengeId %}{{ comments|yesno:',?comments' }}">
+	<p><a href="{% url tracker.views.challenge db=db id=challenge.id %}{{ comments|yesno:',?comments' }}">
 	{% include profile.prepend|add:"tracker/commentslink.html" %}
 	</a></p>
 	<p><a href="{% url tracker.views.challengeindex db=db %}">{% trans "Back to Challenge Index" %}</a></p>

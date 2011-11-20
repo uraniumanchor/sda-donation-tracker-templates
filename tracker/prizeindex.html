@@ -21,14 +21,14 @@
 			<td>{{ prize.description|forumfilter }}</td>
 			<td>{% if prize.image %}<a href="{{ prize.image }}">{% trans "Link" %}</a>{% else %}{% trans "None" %}{% endif %}</td>
 			<td>
-				<a href="{% url tracker.views.donor db=db id=prize.donor %}">
-				{% if prize.donor__lastName %}
-					{% name prize.donor__firstName prize.donor__lastName usernames %}
+				<a href="{% url tracker.views.donor db=db id=prize.winner %}">
+				{% if prize.winner__lastName %}
+					{% name prize.winner__firstName prize.winner__lastName usernames %}
 				{% else %}
 					Unknown
 				{% endif %}
 				</a>
-				{% email prize.donor__email emails "(.)" %}
+				{% email prize.winner__email emails "(.)" %}
 			</td>
 		</tr>
 	{% endfor %}
