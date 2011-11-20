@@ -9,9 +9,11 @@
 	</div>
 	<table>
 	{% for key,database in databases.items %}
-		<tr>
-			<td><a href="{% url tracker.views.index db=key|add:'/' %}">{{ database.COMMENT }}</a></td>
-		</tr>
+		{% if not database.HIDE %}
+			<tr>
+				<td><a href="{% url tracker.views.index db=key|add:'/' %}">{{ database.COMMENT }}</a></td>
+			</tr>
+		{% endif %}
 	{% endfor %}
 	</table>
 	{% include profile.prepend|add:"tracker/navfooter.html" %}
