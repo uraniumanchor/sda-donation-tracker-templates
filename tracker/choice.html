@@ -6,55 +6,109 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Game" %}:</b> <a href="{% url tracker.views.game db=db id=choice.speedRun.id %}">{{ choice.speedRun.name|title }}</a>
-		<b>{% trans "Choice" %}:</b> {{ choice.name|title }}
-		<b>{% trans "Total" %}:</b> {{ agg.amount__sum|money }}
+		<b>{% trans "Game" %}:</b> 
+		<a href="{% url tracker.views.game db=db id=choice.speedRun.id %}">{{ choice.speedRun.name|title }}</a>
+		<b>{% trans "Choice" %}:</b> 
+		{{ choice.name|title }}
+		<b>{% trans "Total" %}:</b> 
+		{{ agg.amount__sum|money }}
 	</div>
 	<table>
 	{% if not comments %}
-		<tr class="header"><td colspan="3">{% trans "Option" %}</td><td colspan="1">{% trans "Amount" %}</td></tr>
+		<tr class="header">
+			<td colspan="3">
+				{% trans "Option" %}
+			</td>
+			<td colspan="1">
+				{% trans "Amount" %}
+			</td>
+		</tr>
 	{% endif %}
 	{% for option in options %}
 		{% if comments %}
-		<tr class="header"><td colspan="3" align="center">{% trans "Option" %}</td><td colspan="1">{% trans "Amount" %}</td></tr>
+		<tr class="header">
+			<td colspan="3" align="center">
+				{% trans "Option" %}
+			</td>
+			<td colspan="1">
+				{% trans "Amount" %}
+			</td>
+		</tr>
 		{% endif %}
 		<tr>
-			<td colspan="3" {% if comments %}align="center"{% endif %}><a href="{% url tracker.views.choiceoption db=db id=option.id %}">{{ option.name }}</a></td>
-			<td colspan="1">{{ option.choicebid__amount__sum|money }} ({{option.choicebid__amount__count}})</td>
+			<td colspan="3" {% if comments %}align="center"{% endif %}>
+				<a href="{% url tracker.views.choiceoption db=db id=option.id %}">
+					{{ option.name }}
+				</a>
+			</td>
+			<td colspan="1">
+				{{ option.choicebid__amount__sum|money }} ({{option.choicebid__amount__count}})
+			</td>
 		</tr>
 		{% if comments and option.choicebid__amount__count > 0 %}
 			<tr class="header">
-				<td {% if not emails %}colspan="2"{% endif %}>{% trans "Name" %}</td>
-				{% if emails %}<td>{% trans "Email" %}</td>{% endif %}
-				<td>{% trans "Time Received" %}</td>
-				<td>{% trans "Amount" %}</td>
+				<td {% if not emails %}colspan="2"{% endif %}>
+					{% trans "Name" %}
+				</td>
+				{% if emails %}
+					<td>
+						{% trans "Email" %}
+					</td>
+				{% endif %}
+				<td>
+					{% trans "Time Received" %}
+				</td>
+				<td>
+					{% trans "Amount" %}
+				</td>
 			</tr>
 		{% for bid in choicebids %}
 			{% if bid.optionId == option.optionId %}
 			<tr>
-				<td {% if not emails %}colspan="2"{% endif %}><a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
-					{% name bid.donation__donor__firstName bid.donation__donor__lastName usernames %}
-				</a></td>
+				<td {% if not emails %}colspan="2"{% endif %}>
+					<a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
+						{% name bid.donation__donor__firstName bid.donation__donor__lastName usernames %}
+					</a>
+				</td>
 				{% email bid.donation__donor__email emails "<td>.</td>" %}
-				<td>{{ bid.donation__timeReceived }}</td>
-				<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a></td>
+				<td>
+					{{ bid.donation__timeReceived }}
+				</td>
+				<td>
+					<a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="4">
-					{{ bid.donation__comment|forumfilter }}
+					{% if bid.donation__commentState == 'Approved' or fulllist %}
+						{{ bid.donation__comment|forumfilter }}
+					{% else %}{% if bid.donation__commentState == 'Pending' %}
+						(Comment not approved)
+					{% else %}{% if bid.donation__commentState == 'Denied' %}
+						(Comment rejected)
+					{% endif %}
 				</td>
 			</tr>
 			{% comment %}{% if forloop.counter < option.choicebid__amount__count %}
-			<tr class="header"><td colspan="4"></td></tr>
+			<tr class="header">
+				<td colspan="4">
+				</td>
+			</tr>
 			{% endif %}{% endcomment %}
 			{% endif %}
 		{% endfor %}
 		{% endif %}
 	{% endfor %}
 	</table>
-	<p><a href="{% url tracker.views.choice db=db id=choice.id %}{{ comments|yesno:',?comments' }}">
-	{% include profile.prepend|add:"tracker/commentslink.html" %}
-	</a></p>
-	<p><a href="{% url tracker.views.choiceindex db=db %}">{% trans "Back to Choice Index" %}</a></p>
+	<p>
+		<a href="{% url tracker.views.choice db=db id=choice.id %}{{ comments|yesno:',?comments' }}">
+			{% include profile.prepend|add:"tracker/commentslink.html" %}
+		</a>
+	</p>
+	<p>
+		<a href="{% url tracker.views.choiceindex db=db %}">
+			{% trans "Back to Choice Index" %}
+		</a>
+	</p>
 	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

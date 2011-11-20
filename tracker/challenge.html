@@ -25,7 +25,13 @@
 			{% if bid.donation__comment|length %}
 			<tr>
 				<td colspan="{{ emails|yesno:'4,3' }}">
-					{{ bid.donation__comment|forumfilter }}
+					{% if bid.donation__commentState == 'Approved' or fulllist %}
+						{{ bid.donation__comment|forumfilter }}
+					{% else %}{% if bid.donation__commentState == 'Pending' %}
+						(Comment not approved)
+					{% else %}{% if bid.donation__commentState == 'Denied' %}
+						(Comment rejected)
+					{% endif %}
 				</td>
 			</tr>
 			{% endif %}
