@@ -2,9 +2,13 @@
 {% load donation_tags %}
 {% load i18n %}
 
-{% block title %}{{ dbtitle|title }} -- {% trans "Index" %}{% endblock %}
+{% block title %}
+	{{ dbtitle|title }} -- {% trans "Index" %}
+{% endblock %}
 
-{% block head %}<link rel="stylesheet" type="text/css" href="{{ static_url }}videoindex.css" />{% endblock %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="{{ static_url }}videoindex.css" />
+{% endblock %}
 
 {% block content %}
 <div class="title">

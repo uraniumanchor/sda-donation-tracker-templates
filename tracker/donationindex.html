@@ -23,7 +23,7 @@
 	<table>
 		<tr class="header">
 			<td>
-				{% trans "Name" %}{% sort "name" %}
+				{% trans "Name" %}{% sort "name" page %}
 			</td>
 			{% if emails %}
 				<td>
@@ -31,10 +31,10 @@
 				</td>
 			{% endif %}
 			<td>
-				{% trans "Time Received" %}{% sort "time" %}
+				{% trans "Time Received" %}{% sort "time" page %}
 			</td>
 			<td>
-				{% trans "Amount" %}{% sort "amount" %}
+				{% trans "Amount" %}{% sort "amount" page %}
 			</td>
 			{% if emails %}
 				<td>
@@ -45,7 +45,7 @@
 				{% trans "Comment" %}
 			</td>
 		</tr>
-	{% cache 1800 donations LANGUAGE_CODE db agg.count usernames emails sort order fulllist %}
+	{% cache 1800 donations LANGUAGE_CODE db agg.count usernames emails sort order page fulllist %}
 	{% for donation in donations %}
 		<tr>
 			<td>
@@ -70,5 +70,7 @@
 	{% endfor %}
 	{% endcache %}
 	</table>
+	
+	{% include profile.prepend|add:"tracker/pagefooter.html" %}
 	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

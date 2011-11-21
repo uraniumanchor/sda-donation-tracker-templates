@@ -1,0 +1,14 @@
+{% load donation_tags %}
+
+<p>
+	{% pagefirst sort order %}
+	{% pageprev sort order pageinfo.has_previous pageinfo.previous_page_number %}
+	{% pagelist sort order page pageinfo.paginator.num_pages %}
+	{% pagenext sort order pageinfo.has_next pageinfo.next_page_number %}
+	{% pagelast sort order pageinfo.paginator.num_pages %}
+</p>
+{% if canfull %}
+	<p>
+		{% pagefull sort order %}
+	</p>
+{% endif %}

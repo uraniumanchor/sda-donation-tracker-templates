@@ -18,7 +18,7 @@
 	<table>
 		<tr class="header">
 			<td>
-				{% trans "Name" %}{% sort "name" %}
+				{% trans "Name" %}{% sort "name" page %}
 			</td>
 			{% if emails %}
 				<td>
@@ -29,13 +29,13 @@
 				{% trans "Alias" %}
 			</td>
 			<td>
-				{% trans "Total" %}{% sort "total" %}
+				{% trans "Total" %}{% sort "total" page %}
 			</td>
 			<td>
-				{% trans "Max" %}{% sort "max" %}/{% trans "Avg" %}{% sort "avg" %} {% trans "Donation" %}
+				{% trans "Max" %}{% sort "max" page %}/{% trans "Avg" %}{% sort "avg" page %} {% trans "Donation" %}
 			</td>
 		</tr>
-	{% cache 1800 donors LANGUAGE_CODE db agg.count usernames emails sort order %}
+	{% cache 1800 donors LANGUAGE_CODE db agg.count usernames emails sort order page fulllist %}
 	{% for donor in donors %}
 		{% if donor.count > 0 %}
 			<tr>
@@ -57,5 +57,7 @@
 	{% endfor %}
 	{% endcache %}
 	</table>
+	
+	{% include profile.prepend|add:"tracker/pagefooter.html" %}
 	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}
