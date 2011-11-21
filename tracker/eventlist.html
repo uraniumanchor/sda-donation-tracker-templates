@@ -5,13 +5,17 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event List" %}</b>
+		<b>
+			{% trans "Event List" %}
+		</b>
 	</div>
 	<table>
 	{% for key,database in databases.items %}
 		{% if not database.HIDE %}
 			<tr>
-				<td><a href="{% url tracker.views.index db=key|add:'/' %}">{{ database.COMMENT }}</a></td>
+				<td>
+					<a href="{% url tracker.views.index db=key|add:'/' %}">{{ database.COMMENT }}</a>
+				</td>
 			</tr>
 		{% endif %}
 	{% endfor %}

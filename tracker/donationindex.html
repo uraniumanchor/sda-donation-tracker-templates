@@ -7,30 +7,65 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} 
-		<b>{% trans "Donation Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }} ({{ agg.amount__count }})
-		<b>{% trans "Max/Avg Donation" %}:</b> {{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
+		<b>
+			{% trans "Event" %}:
+		</b>
+		{{ dbtitle|title }} 
+		<b>
+			{% trans "Donation Index" %} {% trans "Total" %}:
+		</b>
+		{{ agg.amount|money }} ({{ agg.count }})
+		<b>
+			{% trans "Max/Avg Donation" %}:
+		</b>
+		{{ agg.max|money }}/{{ agg.avg|money }}
 	</div>
 	<table>
 		<tr class="header">
-			<td>{% trans "Name" %}{% sort "name" %}</td>
-			{% if emails %}<td>{% trans "Email" %}</td>{% endif %}
-			<td>{% trans "Time Received" %}{% sort "time" %}</td>
-			<td>{% trans "Amount" %}{% sort "amount" %}</td>
-			{% if emails %}<td>{% trans "Source" %}</td>{% endif %}
-			<td>{% trans "Comment" %}</td>
+			<td>
+				{% trans "Name" %}{% sort "name" %}
+			</td>
+			{% if emails %}
+				<td>
+					{% trans "Email" %}
+				</td>
+			{% endif %}
+			<td>
+				{% trans "Time Received" %}{% sort "time" %}
+			</td>
+			<td>
+				{% trans "Amount" %}{% sort "amount" %}
+			</td>
+			{% if emails %}
+				<td>
+					{% trans "Source" %}
+				</td>
+			{% endif %}
+			<td>
+				{% trans "Comment" %}
+			</td>
 		</tr>
-	{% cache 1800 donations LANGUAGE_CODE db agg.amount__count usernames emails sort order fulllist %}
+	{% cache 1800 donations LANGUAGE_CODE db agg.count usernames emails sort order fulllist %}
 	{% for donation in donations %}
 		<tr>
-			<td><a href="{% url tracker.views.donor db=db id=donation.donor %}">
-				{% name donation.donor__firstName donation.donor__lastName usernames %}
-			</a></td>
+			<td>
+				<a href="{% url tracker.views.donor db=db id=donation.donor %}">{% name donation.donor__firstName donation.donor__lastName usernames %}</a>
+			</td>
 			{% email donation.donor__email emails "<td>.</td>" %}
-			<td>{{ donation.timeReceived }}</td>
-			<td><a href="{% url tracker.views.donation db=db id=donation.id %}">{{ donation.amount|money }}</a></td>
-			{% if emails %}<td>{{ donation.domain|title }}</td>{% endif %}
-			<td>{% if donation.comment|length %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</td>
+			<td>
+				{{ donation.timeReceived }}
+			</td>
+			<td>
+				<a href="{% url tracker.views.donation db=db id=donation.id %}">{{ donation.amount|money }}</a>
+			</td>
+			{% if emails %}
+				<td>
+					{{ donation.domain|title }}
+				</td>
+			{% endif %}
+			<td>
+				{% if donation.comment|length %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}
+			</td>
 		</tr>
 	{% endfor %}
 	{% endcache %}

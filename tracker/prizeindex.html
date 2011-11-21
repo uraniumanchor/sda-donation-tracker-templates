@@ -6,20 +6,40 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Prize Index" %}</b>
+		<b>
+			{% trans "Event" %}:
+		</b>
+		{{ dbtitle|title }}
+		<b>
+			{% trans "Prize Index" %}
+		</b>
 	</div>
 	<table>
 		<tr class="header">
-			<td>{% trans "Name" %}</td>
-			<td>{% trans "Description" %}</td>
-			<td>{% trans "Image" %}</td>
-			<td>{% trans "Winner" %}</td>
+			<td>
+				{% trans "Name" %}
+			</td>
+			<td>
+				{% trans "Description" %}
+			</td>
+			<td>
+				{% trans "Image" %}
+			</td>
+			<td>
+				{% trans "Winner" %}
+			</td>
 		</tr>
 	{% for prize in prizes %}
 		<tr>
-			<td>{{ prize.name|title }}</td>
-			<td>{{ prize.description|forumfilter }}</td>
-			<td>{% if prize.image %}<a href="{{ prize.image }}">{% trans "Link" %}</a>{% else %}{% trans "None" %}{% endif %}</td>
+			<td>
+				{{ prize.name|title }}
+			</td>
+			<td>
+				{{ prize.description|forumfilter }}
+			</td>
+			<td>
+				{% if prize.image %}<a href="{{ prize.image }}">{% trans "Link" %}</a>{% else %}{% trans "None" %}{% endif %}
+			</td>
 			<td>
 				<a href="{% url tracker.views.donor db=db id=prize.winner %}">
 				{% if prize.winner__lastName %}

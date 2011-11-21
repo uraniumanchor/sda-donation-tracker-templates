@@ -6,7 +6,14 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Game" %}:</b> {{ game.name|title }} <b>{% trans "Description" %}:</b> {{ game.description }}
+		<b>
+			{% trans "Game" %}:
+		</b>
+		{{ game.name|title }}
+		<b>
+			{% trans "Description" %}:
+		</b>
+		{{ game.description }}
 	</div>
 	{% if challenges %}
 	<div class="header">
@@ -14,15 +21,27 @@
 	</div>
 	<table>
 		<tr class="header">
-			<td>{% trans "Name" %}</td>
-			<td>{% trans "Goal" %}</td>
-			<td>{% trans "Amount" %}</td>
+			<td>
+				{% trans "Name" %}
+			</td>
+			<td>
+				{% trans "Goal" %}
+			</td>
+			<td>
+				{% trans "Amount" %}
+			</td>
 		</tr>
 	{% for challenge in challenges %}
 		<tr>
-			<td><a href="{% url tracker.views.challenge db=db id=challenge.id %}">{{ challenge.name }}</a></td>
-			<td>{{ challenge.goal|money }}</td>
-			<td>{{ challenge.challengebid__amount__sum|money }} ({{ challenge.challengebid__count }})</td>
+			<td>
+				<a href="{% url tracker.views.challenge db=db id=challenge.id %}">{{ challenge.name }}</a>
+			</td>
+			<td>
+				{{ challenge.goal|money }}
+			</td>
+			<td>
+				{{ challenge.challengebid__amount__sum|money }} ({{ challenge.challengebid__count }})
+			</td>
 		</tr>
 	{% endfor %}
 	</table>
@@ -33,9 +52,15 @@
 	</div>
 	<table>
 		<tr class="header">
-			<td>{% trans "Name" %}</td>
-			<td>{% trans "Option" %}</td>
-			<td>{% trans "Amount" %}</td>
+			<td>
+				{% trans "Name" %}
+			</td>
+			<td>
+				{% trans "Option" %}
+			</td>
+			<td>
+				{% trans "Amount" %}
+			</td>
 		</tr>
 	{% for choice in choices %}
 		{% ifchanged choice.name %}{% if forloop.counter > 1 %}
@@ -43,9 +68,15 @@
 		{% endif %}{% endifchanged %}
 		<tr>
 
-			<td><a href="{% url tracker.views.choice db=db id=choice.id %}">{{ choice.name|title }}</a></td>
-			<td>{% if choice.choiceoption %}<a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a>{% endif %}</td>
-			<td>{{ choice.choiceoption__choicebid__amount__sum|money }} ({{ choice.choiceoption__choicebid__count }})</td>
+			<td>
+				<a href="{% url tracker.views.choice db=db id=choice.id %}">{{ choice.name|title }}</a>
+			</td>
+			<td>
+				{% if choice.choiceoption %}<a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a>{% endif %}
+			</td>
+			<td>
+				{{ choice.choiceoption__choicebid__amount__sum|money }} ({{ choice.choiceoption__choicebid__count }})
+			</td>
 		</tr>
 	{% endfor %}
 	</table>

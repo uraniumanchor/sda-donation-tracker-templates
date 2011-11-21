@@ -7,27 +7,51 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Donor Index" %}</b>
+		<b>
+			{% trans "Event" %}:
+		</b>
+		{{ dbtitle|title }}
+		<b>
+			{% trans "Donor Index" %}
+		</b>
 	</div>
 	<table>
 		<tr class="header">
-			<td>{% trans "Name" %}{% sort "name" %}</td>
-			{% if emails %}<td>{% trans "Email" %}</td>{% endif %}
-			<td>{% trans "Alias" %}</td>
-			<td>{% trans "Total" %}{% sort "total" %}</td>
-			<td>{% trans "Max" %}{% sort "max" %}/{% trans "Avg" %}{% sort "avg" %} {% trans "Donation" %}</td>
+			<td>
+				{% trans "Name" %}{% sort "name" %}
+			</td>
+			{% if emails %}
+				<td>
+					{% trans "Email" %}
+				</td>
+			{% endif %}
+			<td>
+				{% trans "Alias" %}
+			</td>
+			<td>
+				{% trans "Total" %}{% sort "total" %}
+			</td>
+			<td>
+				{% trans "Max" %}{% sort "max" %}/{% trans "Avg" %}{% sort "avg" %} {% trans "Donation" %}
+			</td>
 		</tr>
-	{% cache 1800 donors LANGUAGE_CODE db agg.amount__count usernames emails sort order %}
+	{% cache 1800 donors LANGUAGE_CODE db agg.count usernames emails sort order %}
 	{% for donor in donors %}
-		{% if donor.donation__amount__count > 0 %}
+		{% if donor.count > 0 %}
 			<tr>
-				<td><a href="{% url tracker.views.donor db=db id=donor.id %}">
-					{% name donor.firstName donor.lastName usernames %}
-				</a></td>
+				<td>
+					<a href="{% url tracker.views.donor db=db id=donor.id %}">{% name donor.firstName donor.lastName usernames %}</a>
+				</td>
 				{% email donor.email emails "<td>.</td>" %}
-				<td>{{ donor.alias }}</td>
-				<td>{{ donor.donation__amount__sum|money }} ({{ donor.donation__amount__count }})</td>
-				<td>{{ donor.donation__amount__max|money }}/{{ donor.donation__amount__avg|money }}</td>
+				<td>
+					{{ donor.alias }}
+				</td>
+				<td>
+					{{ donor.amount|money }} ({{ donor.count }})
+				</td>
+				<td>
+					{{ donor.max|money }}/{{ donor.avg|money }}
+				</td>
 			</tr>
 		{% endif %}
 	{% endfor %}

@@ -5,7 +5,9 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Selected Database Does Not Exist" %}</b>
+		<b>
+			{% trans "Selected Database Does Not Exist" %}
+		</b>
 	</div>
 	{% include profile.prepend|add:"tracker/navfooter.html" %}
 {% endblock %}

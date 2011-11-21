@@ -6,12 +6,18 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Game" %}:</b> 
+		<b>
+			{% trans "Game" %}:
+		</b> 
 		<a href="{% url tracker.views.game db=db id=choice.speedRun.id %}">{{ choice.speedRun.name|title }}</a>
-		<b>{% trans "Choice" %}:</b> 
+		<b>
+			{% trans "Choice" %}:
+		</b> 
 		{{ choice.name|title }}
-		<b>{% trans "Total" %}:</b> 
-		{{ agg.amount__sum|money }}
+		<b>
+			{% trans "Total" %}:
+		</b> 
+		{{ agg.amount|money }}
 	</div>
 	<table>
 	{% if not comments %}
@@ -42,10 +48,10 @@
 				</a>
 			</td>
 			<td colspan="1">
-				{{ option.choicebid__amount__sum|money }} ({{option.choicebid__amount__count}})
+				{{ option.amount|money }} ({{option.count}})
 			</td>
 		</tr>
-		{% if comments and option.choicebid__amount__count > 0 %}
+		{% if comments and option.count > 0 %}
 			<tr class="header">
 				<td {% if not emails %}colspan="2"{% endif %}>
 					{% trans "Name" %}
@@ -90,10 +96,7 @@
 				</td>
 			</tr>
 			{% comment %}{% if forloop.counter < option.choicebid__amount__count %}
-			<tr class="header">
-				<td colspan="4">
-				</td>
-			</tr>
+			<tr class="header"><td colspan="4"></td></tr>
 			{% endif %}{% endcomment %}
 			{% endif %}
 		{% endfor %}

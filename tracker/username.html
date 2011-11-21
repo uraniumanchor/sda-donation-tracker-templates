@@ -5,7 +5,9 @@
 
 {% block content %}
 <div class="title">
-<b>{% trans "Pick A Username For This Account" %}</b>
+	<b>
+		{% trans "Pick A Username For This Account" %}
+	</b>
 </div>
 {% if usernameform.errors %}
 <p class="errors">{% trans "Please correct errors below" %}:<br />

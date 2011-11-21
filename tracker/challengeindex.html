@@ -6,16 +6,47 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Challenge Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }}
+		<b>
+			{% trans "Event" %}:
+		</b>
+		{{ dbtitle|title }}
+		<b>
+			{% trans "Challenge Index" %}
+		</b>
+		<b>
+			{% trans "Total" %}:
+		</b>
+		{{ agg.amount|money }}
 	</div>
 	<table>
-		<tr class="header"><td>{% trans "Game" %}</td><td>{% trans "Challenge" %}</td><td>{% trans "Goal" %}</td><td>{% trans "Amount" %}</td></tr>
+		<tr class="header">
+			<td>
+				{% trans "Game" %}
+			</td>
+			<td>
+				{% trans "Challenge" %}
+			</td>
+			<td>
+				{% trans "Goal" %}
+			</td>
+			<td>
+				{% trans "Amount" %}
+			</td>
+		</tr>
 	{% for challenge in challenges %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=challenge.speedRun %}">{{ challenge.speedRun__name|title }}</a></td>
-			<td><a href="{% url tracker.views.challenge db=db id=challenge.id %}">{{ challenge.name|title }}</a></td>
-			<td>{{ challenge.goal|money }}</td>
-			<td>{{ challenge.challengebid__amount__sum|money }} ({{ challenge.challengebid__count }}) </td>
+			<td>
+				<a href="{% url tracker.views.game db=db id=challenge.speedRun %}">{{ challenge.speedRun__name|title }}</a>
+			</td>
+			<td>
+				<a href="{% url tracker.views.challenge db=db id=challenge.id %}">{{ challenge.name|title }}</a>
+			</td>
+			<td>
+				{{ challenge.goal|money }}
+			</td>
+			<td>
+				{{ challenge.amount|money }} ({{ challenge.count }}) 
+			</td>
 		</tr>
 	{% endfor %}
 	</table>

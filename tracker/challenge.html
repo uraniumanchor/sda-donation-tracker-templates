@@ -6,25 +6,54 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Game" %}:</b> {{ challenge.speedRun|title }} 
-		<b>{% trans "Challenge" %}:</b> {{ challenge.name|title }}
-		<b>{% trans "Total" %}:</b> {{ agg.amount__sum|money }}
+		<b>
+			{% trans "Game" %}:
+		</b>
+		{{ challenge.speedRun|title }} 
+		<b>
+			{% trans "Challenge" %}:
+		</b>
+		{{ challenge.name|title }}
+		<b>
+			{% trans "Total" %}:
+		</b>
+		{{ agg.amount|money }}
 	</div>
 	<table>
-		<tr class="header"><td>{% trans "Name" %}</td>{% if emails %}<td>{% trans "Email" %}</td>{% endif %}<td>{% trans "Time Received" %}</td><td>{% trans "Amount" %}</td></tr>
+		<tr class="header">
+			<td {% if not emails %}colspan="2"{% endif %}>
+				{% trans "Name" %}{% sort "name" %}
+			</td>
+			{% if emails %}
+				<td>
+					{% trans "Email" %}
+				</td>{% endif %}
+			<td>
+				{% trans "Time Received" %}{% sort "time" %}
+			</td>
+			<td>
+				{% trans "Amount" %}{% sort "amount" %}
+			</td>
+		</tr>
 	{% for bid in bids %}
 		<tr>
-			<td><a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
-				{% name bid.donation__donor__firstName bid.donation__donor__lastName usernames %}
-			</a></td>
+			<td {% if not emails %}colspan="2"{% endif %}>
+				<a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
+					{% name bid.donation__donor__firstName bid.donation__donor__lastName usernames %}
+				</a>
+			</td>
 			{% email bid.donation__donor__email emails "<td>.</td>" %}
-			<td>{{ bid.donation__timeReceived }}</td>
-			<td><a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a></td>
+			<td>
+				{{ bid.donation__timeReceived }}
+			</td>
+			<td>
+				<a href="{% url tracker.views.donation db=db id=bid.donation %}">{{ bid.amount|money }}</a>
+			</td>
 		</tr>
 		{% if comments %}
 			{% if bid.donation__comment|length %}
 			<tr>
-				<td colspan="{{ emails|yesno:'4,3' }}">
+				<td colspan="4">
 					{% if bid.donation__commentState == 'APPROVED' or fulllist %}
 						{{ bid.donation__comment|forumfilter }}
 					{% else %}{% if bid.donation__commentState == 'PENDING' %}
@@ -37,7 +66,7 @@
 			{% endif %}
 		
 			{% if forloop.counter < bids|length %}
-			<tr class="header"><td colspan="{{ emails|yesno:'4,3' }}"></td></tr>
+			<tr class="header"><td colspan="4"></td></tr>
 			{% endif %}
 		{% endif %}
 	{% endfor %}

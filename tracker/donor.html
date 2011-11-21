@@ -6,20 +6,30 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Name" %}:</b> 
+		<b>
+			{% trans "Name" %}:
+		</b> 
 		{% name donor.firstName donor.lastName usernames %}
 		{% if emails %}
-			<b>{% trans "Email" %}</b>: 
+			<b>
+				{% trans "Email" %}:
+			</b> 
 			{% email donor.email %}
 		{% endif %}
 		{% if donor.alias %}
-			<b>{% trans "Alias" %}</b>: 
+			<b>
+				{% trans "Alias" %}:
+			</b>
 			{{ donor.alias }} 
 		{% endif %}
-		<b>{% trans "Total Donations" %}:</b> 
-		{{ agg.amount__sum|money }} ({{ agg.amount__count }}) 
-		<b>{% trans "Max/Avg Donation" %}:</b> 
-		{{ agg.amount__max|money }}/{{ agg.amount__avg|money }}
+		<b>
+			{% trans "Total Donations" %}:
+		</b> 
+		{{ agg.amount|money }} ({{ agg.count }}) 
+		<b>
+			{% trans "Max/Avg Donation" %}:
+		</b> 
+		{{ agg.max|money }}/{{ agg.avg|money }}
 	</div>
 	<table>
 		<tr class="header">

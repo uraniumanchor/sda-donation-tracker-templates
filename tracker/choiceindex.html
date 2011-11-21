@@ -6,19 +6,50 @@
 
 {% block content %}
 	<div class="title">
-		<b>{% trans "Event" %}:</b> {{ dbtitle|title }} <b>{% trans "Choice Index" %} {% trans "Total" %}:</b> {{ agg.amount__sum|money }}
+		<b>
+			{% trans "Event" %}:
+		</b>
+		{{ dbtitle|title }}
+		<b>
+			{% trans "Choice Index" %}
+		</b>
+		<b>
+			{% trans "Total" %}:
+		</b>
+		{{ agg.amount|money }}
 	</div>
 	<table>
-		<tr class="header"><td>{% trans "Game" %}</td><td>{% trans "Choice" %}</td><td>{% trans "Option" %}</td><td>{% trans "Amount" %}</td></tr>
+		<tr class="header">
+			<td>
+				{% trans "Game" %}
+			</td>
+			<td>
+				{% trans "Choice" %}
+			</td>
+			<td>
+				{% trans "Option" %}
+			</td>
+			<td>
+				{% trans "Amount" %}
+			</td>
+		</tr>
 	{% for choice in choices %}
 		{% ifchanged choice.speedRun__name %}{% if forloop.counter > 1 %}
 		<tr class="header"><td colspan="4"></td></tr>
 		{% endif %}{% endifchanged %}
 		<tr>
-			<td><a href="{% url tracker.views.game db=db id=choice.speedRun %}">{{ choice.speedRun__name|title }}</a></td>
-			<td><a href="{% url tracker.views.choice db=db id=choice.id %}">{{ choice.name|title }}</a></td>
-			<td>{% if choice.choiceoption %}<a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a>{% endif %}</td>
-			<td>{{ choice.choiceoption__choicebid__amount__sum|money }} ({{ choice.choiceoption__choicebid__count }})</td>
+			<td>
+				<a href="{% url tracker.views.game db=db id=choice.speedRun %}">{{ choice.speedRun__name|title }}</a>
+			</td>
+			<td>
+				<a href="{% url tracker.views.choice db=db id=choice.id %}">{{ choice.name|title }}</a>
+			</td>
+			<td>
+				{% if choice.choiceoption %}<a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a>{% endif %}
+			</td>
+			<td>
+				{{ choice.amount|money }} ({{ choice.count }})
+			</td>
 		</tr>
 	{% endfor %}
 	</table>
