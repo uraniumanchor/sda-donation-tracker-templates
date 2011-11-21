@@ -40,7 +40,7 @@
 				{{ challenge.goal|money }}
 			</td>
 			<td>
-				{{ challenge.challengebid__amount__sum|money }} ({{ challenge.challengebid__count }})
+				{{ challenge.amount|money }} ({{ challenge.count }})
 			</td>
 		</tr>
 	{% endfor %}
@@ -75,7 +75,7 @@
 				{% if choice.choiceoption %}<a href="{% url tracker.views.choiceoption db=db id=choice.choiceoption %}">{{ choice.choiceoption__name }}</a>{% endif %}
 			</td>
 			<td>
-				{{ choice.choiceoption__choicebid__amount__sum|money }} ({{ choice.choiceoption__choicebid__count }})
+				{{ choice.amount|money }} ({{ choice.count }})
 			</td>
 		</tr>
 	{% endfor %}
