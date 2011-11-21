@@ -69,7 +69,7 @@
 				</td>
 			</tr>
 		{% for bid in choicebids %}
-			{% if bid.optionId == option.optionId %}
+			{% if bid.choiceOption == option.id %}
 			<tr>
 				<td {% if not emails %}colspan="2"{% endif %}>
 					<a href="{% url tracker.views.donor db=db id=bid.donation__donor %}">
