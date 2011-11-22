@@ -2,7 +2,7 @@
 
 <div class="footer">
 <form action="{% url django.views.i18n.set_language %}" method="post">
-{% csrf_token %}
+<div>
 <input name="next" type="hidden" value="{{ next }}" />
 <label for="language">{% trans "Choose Language" %}</label>
 <select name="language">
@@ -12,6 +12,8 @@
 <option value="{{ lang_code }}"{% if LANGUAGE_CODE|slice:":2" == lang_code %} selected="selected"{% endif %}>{{ lang.name_local }} ({{ lang_name }})</option>
 {% endfor %}
 </select>
+{% csrf_token %}
 <input type="submit" value="{% trans 'Set' %}" />
+</div>
 </form>
 </div>
