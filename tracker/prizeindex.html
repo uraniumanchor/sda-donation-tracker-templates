@@ -41,14 +41,18 @@
 				{% if prize.image %}<a href="{{ prize.image }}">{% trans "Link" %}</a>{% else %}{% trans "None" %}{% endif %}
 			</td>
 			<td>
-				<a href="{% url tracker.views.donor db=db id=prize.winner %}">
-				{% if prize.winner__lastName %}
-					{% name prize.winner__firstName prize.winner__lastName usernames %}
+				{% if prize.winner %}
+					<a href="{% url tracker.views.donor db=db id=prize.winner %}">
+					{% if prize.winner__lastName %}
+						{% name prize.winner__firstName prize.winner__lastName usernames %}
+					{% else %}
+						Unknown
+					{% endif %}
+					</a>
+					{% email prize.winner__email emails "(.)" %}
 				{% else %}
-					Unknown
+					None
 				{% endif %}
-				</a>
-				{% email prize.winner__email emails "(.)" %}
 			</td>
 		</tr>
 	{% endfor %}

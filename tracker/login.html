@@ -4,6 +4,7 @@
 <p>{% trans "Your username and password didn't match. Please try again." %}</p>
 {% endif %}
 <p><a href="{% url django_openid_auth.views.login_begin %}">{% trans "Log In with a Google Account" %}</a></p>
+{% comment %}
 <form method="post" action="{% url donations.tracker.views.login %}">
 <fieldset>
 {% csrf_token %}
@@ -15,3 +16,4 @@
 <input type="hidden" name="next" value="{{ next }}" />
 </fieldset>
 </form>
+{% endcomment %}
