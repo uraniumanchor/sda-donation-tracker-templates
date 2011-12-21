@@ -20,7 +20,10 @@
 				{% trans "Name" %}
 			</td>
 			<td>
-				{% trans "Description" %}
+				{% trans "Minimum Bid" %}
+			</td>
+			<td>
+				{% trans "Games" %}
 			</td>
 			<td>
 				{% trans "Image" %}
@@ -32,10 +35,25 @@
 	{% for prize in prizes %}
 		<tr>
 			<td>
-				{{ prize.name|title }}
+				<a href="{% url tracker.views.prize db=db id=prize.id %}">
+					{{ prize.name|title }}
+				</a>
 			</td>
 			<td>
-				{{ prize.description|forumfilter }}
+				{{ prize.minimumBid|money }}
+			</td>
+			<td>
+				{% if prize.startGame %}
+					<a href="{% url tracker.views.game db=db id=prize.startGame %}">
+						{{ prize.startGame__name|title }}
+					</a>
+				{% endif %}
+				{% if prize.startGame != prize.endGame %}
+					&lt;-&gt;
+					<a href="{% url tracker.views.game db=db id=prize.endGame %}">
+						{{ prize.endGame__name|title }}
+					</a>
+				{% endif %}
 			</td>
 			<td>
 				{% if prize.image %}<a href="{{ prize.image }}">{% trans "Link" %}</a>{% else %}{% trans "None" %}{% endif %}
@@ -46,12 +64,12 @@
 					{% if prize.winner__lastName %}
 						{% name prize.winner__firstName prize.winner__lastName usernames %}
 					{% else %}
-						Unknown
+						{% trans "Unknown" %}
 					{% endif %}
 					</a>
 					{% email prize.winner__email emails "(.)" %}
 				{% else %}
-					None
+					{% trans "None" %}
 				{% endif %}
 			</td>
 		</tr>
