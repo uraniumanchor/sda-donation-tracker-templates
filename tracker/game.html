@@ -10,11 +10,21 @@
 			{% trans "Game" %}:
 		</b>
 		{{ game.name|title }}
-		<b>
-			{% trans "Description" %}:
-		</b>
-		{{ game.description }}
 	</div>
+	<table>
+		<tr class="header">
+			<td align="center">
+				<b>
+					{% trans "Description" %}
+				</b>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{{ game.description|forumfilter }}
+			</td>
+		</tr>
+	</table>
 	{% if challenges %}
 	<div class="header">
 		{% trans "Challenges" %}

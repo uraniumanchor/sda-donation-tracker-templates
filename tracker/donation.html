@@ -32,11 +32,11 @@
 			<td>
 			{% if donation.commentState == 'APPROVED' or fulllist %}
 				{{ donation.comment|forumfilter }}
-			{% else %}{% if donation.commentState == 'PENDING' %}
+			{% elif donation.commentState == 'PENDING' %}
 				(Comment not approved)
-			{% else %}{% if donation.commentState == 'DENIED' %}
+			{% elif donation.commentState == 'DENIED' %}
 				(Comment rejected)
-			{% endif %}{% endif %}{% endif %}
+			{% endif %}
 			</td>
 		</tr>
 	</table>

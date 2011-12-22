@@ -37,6 +37,9 @@
 		{% ifchanged choice.speedRun__name %}{% if forloop.counter > 1 %}
 		<tr class="header"><td colspan="4"></td></tr>
 		{% endif %}{% endifchanged %}
+		{% ifchanged choice.name %}{% if forloop.counter > 1 %}
+		<tr><td colspan="4"></td></tr>
+		{% endif %}{% endifchanged %}
 		<tr>
 			<td>
 				<a href="{% url tracker.views.game db=db id=choice.speedRun %}">{{ choice.speedRun__name|title }}</a>

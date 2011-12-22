@@ -61,11 +61,11 @@
 				<td colspan="3">
 					{% if donation.commentState == 'APPROVED' or fulllist %}
 						{{ donation.comment|forumfilter }}
-					{% else %}{% if donation.commentState == 'PENDING' %}
-						(Comment not approved)
-					{% else %}{% if donation.commentState == 'DENIED' %}
-						(Comment rejected)
-					{% endif %}{% endif %}{% endif %}
+					{% elif donation.commentState == 'PENDING' %}
+						({% trans "Comment not approved" %})
+					{% elif donation.commentState == 'DENIED' %}
+						({% trans "Comment rejected" %})
+					{% endif %}
 				</td>
 			</tr>
 			{% endif %}
