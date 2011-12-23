@@ -52,7 +52,7 @@
 				<a href="{% url tracker.views.donation db=db id=donation.id %}">{{ donation.amount|money }}</a>
 			</td>
 			<td>
-				{% if donation.comment|length %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}
+				{{ donation.comment|length|yesno:_("Yes,No") }}
 			</td>
 		</tr>
 		{% if comments %}

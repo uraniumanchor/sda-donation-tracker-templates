@@ -22,6 +22,12 @@
 			<td>
 				{% trans "Description" %}
 			</td>
+			<td>
+				{% trans "Bid Wars" %}
+			</td>
+			<td>
+				{% trans "Donation Challenges" %}
+			</td>
 		</tr>
 	{% for game in games %}
 		<tr>
@@ -30,6 +36,12 @@
 			</td>
 			<td>
 				{{ game.description|forumfilter }}
+			</td>
+			<td>
+				{{ game.choices|yesno:_("Yes,No") }}
+			</td>
+			<td>
+				{{ game.challenges|yesno:_("Yes,No") }}
 			</td>
 		</tr>
 	{% endfor %}

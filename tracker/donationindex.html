@@ -64,7 +64,7 @@
 				</td>
 			{% endif %}
 			<td>
-				{% if donation.comment|length %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}
+				{{ donation.comment|length|yesno:_("Yes,No") }}
 			</td>
 		</tr>
 	{% endfor %}
